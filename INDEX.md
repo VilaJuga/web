@@ -170,3 +170,25 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - La edición ahora es más parecida a Google Sites: elegir sección a la izquierda y editar campos simples a la derecha.
   - Se mantiene guardado/restauración y persistencia de cambios en `localStorage`.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (edición sobre la página tipo Google Sites)
+- Solicitud: editar directamente “encima de la página”, ver exactamente lo que se verá después, todo en castellano y aún más simple.
+- Cambios aplicados:
+  - `admin.html`:
+    - nuevo layout de editor visual con:
+      - login en castellano,
+      - barra superior de acciones,
+      - iframe central con la web real (`index.html`) en edición,
+      - panel lateral de propiedades del elemento seleccionado.
+  - `src/styles/admin.css`:
+    - nuevo diseño limpio tipo Google Sites (lienzo principal + inspector lateral).
+  - `src/scripts/admin.js`:
+    - modo WYSIWYG real: clic en texto/imagen de la web para editar ese mismo elemento.
+    - selección visual de elementos editables.
+    - edición en tiempo real y guardado a `localStorage` leyendo la página editada.
+    - mantenimiento de roles admin/superadmin + gestión de admins para superadmin.
+    - todo el flujo y mensajes en castellano.
+- Funcionamiento:
+  - El usuario edita directamente lo que ve en pantalla y ese resultado es el que se guarda.
+  - Se conserva restaurar, guardar, abrir web y cerrar sesión.
+- Git: commit y push realizados al finalizar este turno.

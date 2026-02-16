@@ -1,57 +1,67 @@
 ﻿<!DOCTYPE html>
-<html lang="ca">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VilaJuga Sites Editor</title>
+  <title>Editor visual - VilaJuga</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="src/styles/admin.css" />
 </head>
 <body>
-  <main class="login-wrap" id="loginCard">
+  <main id="loginView" class="login-view">
     <section class="login-card">
-      <h1>VilaJuga Sites</h1>
-      <p>Editor molt simple per canviar la web.</p>
-      <label>Usuari
-        <input id="user" type="text" autocomplete="username" />
+      <h1>Editor visual</h1>
+      <p>Edita la web como en Google Sites: viendo el resultado en tiempo real.</p>
+      <label>Usuario
+        <input id="loginUser" type="text" autocomplete="username" />
       </label>
-      <label>Contrasenya
-        <input id="pwd" type="password" autocomplete="current-password" />
+      <label>Contraseña
+        <input id="loginPass" type="password" autocomplete="current-password" />
       </label>
       <button id="loginBtn" type="button">Entrar</button>
-      <p class="error" id="loginError"></p>
+      <p id="loginError" class="error"></p>
     </section>
   </main>
 
-  <section class="sites hidden" id="dashboard">
-    <header class="topbar">
-      <div class="brand">
-        <strong>VilaJuga Sites</strong>
-        <span id="welcomeText">Editor</span>
+  <section id="editorView" class="editor-view hidden">
+    <header class="editor-topbar">
+      <div class="top-left">
+        <strong>VilaJuga - Editor visual</strong>
+        <span id="sessionLabel"></span>
       </div>
-      <div class="actions">
-        <span class="role" id="roleBadge"></span>
-        <button class="btn ghost" id="openSiteBtn" type="button">Veure web</button>
+      <div class="top-actions">
+        <span id="roleBadge" class="role-badge"></span>
+        <button class="btn ghost" id="openSiteBtn" type="button">Abrir web</button>
         <button class="btn ghost" id="resetBtn" type="button">Restaurar</button>
         <button class="btn primary" id="saveBtn" type="button">Guardar</button>
-        <button class="btn danger" id="logoutBtn" type="button">Tancar sessió</button>
+        <button class="btn danger" id="logoutBtn" type="button">Cerrar sesión</button>
       </div>
     </header>
 
-    <div class="workspace">
-      <aside class="sidebar" id="sidebarNav"></aside>
-      <section class="editor">
-        <div class="editor-card">
-          <h2 id="sectionTitle"></h2>
-          <p id="sectionHelp"></p>
-          <div id="formRoot"></div>
-        </div>
+    <main class="editor-layout">
+      <section class="canvas-wrap">
+        <div class="canvas-hint">Haz clic en cualquier texto o imagen para editarlo</div>
+        <iframe id="siteFrame" src="index.html" title="Vista previa editable"></iframe>
       </section>
-    </div>
 
-    <div class="toast" id="toast"></div>
+      <aside class="inspector">
+        <div class="inspector-card">
+          <h2>Propiedades</h2>
+          <p class="muted" id="selectionHelp">Selecciona un elemento en la página para editarlo.</p>
+          <div id="selectionFields"></div>
+        </div>
+
+        <div class="inspector-card hidden" id="superAdminCard">
+          <h2>Usuarios admin</h2>
+          <p class="muted">Activa o desactiva quién puede entrar al editor.</p>
+          <div id="adminUserList"></div>
+        </div>
+      </aside>
+    </main>
+
+    <div id="toast" class="toast"></div>
   </section>
 
   <script type="module" src="src/scripts/admin.js"></script>
