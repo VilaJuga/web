@@ -150,3 +150,23 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - El editor ahora es más limpio y directo para edición diaria.
   - Puedes cerrar sesión desde el panel sin recargar página.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (editor ultra simple estilo Google Sites)
+- Solicitud: edición 100% estilo Google Sites, hiper simple para que un niño pueda editar.
+- Cambios aplicados:
+  - `admin.html`:
+    - estructura nueva tipo Sites: barra superior + sidebar de secciones + panel único de edición.
+    - login simple y botón visible de cerrar sesión.
+  - `src/styles/admin.css`:
+    - rediseño completo a estilo limpio Google (fondo gris claro, tarjetas blancas, azul primario, tipografía simple).
+    - controles grandes, claros y sin ruido visual.
+  - `src/scripts/admin.js`:
+    - navegación por secciones (`Menu`, `Portada`, `Introducció`, `Galeria`, `Blocs`, `Timeline`, `Final`).
+    - formularios guiados sin acciones complejas (sin eliminar/añadir elementos libres).
+    - edición fija por bloques para evitar errores y hacerlo apto para usuarios no técnicos.
+    - superadmin mantiene sección `Admins` para activar/desactivar cuentas.
+    - cierre de sesión real y flujo de login simplificado.
+- Funcionamiento:
+  - La edición ahora es más parecida a Google Sites: elegir sección a la izquierda y editar campos simples a la derecha.
+  - Se mantiene guardado/restauración y persistencia de cambios en `localStorage`.
+- Git: commit y push realizados al finalizar este turno.
