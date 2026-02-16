@@ -1,7 +1,3 @@
 .timeline-section {
-  background: #ffffff;
-}
-
-.timeline {
-  margin-top: 1.5rem;
+  position: relative;
 }

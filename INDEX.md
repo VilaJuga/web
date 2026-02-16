@@ -78,3 +78,13 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
 - Funcionamiento:
   - El bloque “Què s'hi inclou?” queda renderizado con el marcado y estilos del mismo sistema de la web original, evitando aproximaciones propias.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (timeline igual sin romper el resto)
+- Solicitud: dejar “Què s'hi inclou?” igual al original, manteniendo el resto como está ahora.
+- Cambios aplicados:
+  - `index.html`: se añade la hoja `post-12.css` original de Elementor y se aplica a esta sección la misma estructura/clases (`elementor-element-966b2c5`, `elementor-element-946e0f6`, `elementor-element-0c5f9fc`).
+  - `index.html`: `body` pasa a `class="elementor-12"` para activar selectores de esa hoja solo cuando existen los IDs/clases de widget.
+  - `src/styles/components/timeline.css`: se elimina override visual propio y se deja solo posicionamiento base para no interferir.
+- Funcionamiento:
+  - El timeline usa las reglas originales de diseño del bloque en producción (márgenes, línea central, posición de labels/iconos y tipografías), mientras el resto conserva tu estructura actual.
+- Git: commit y push realizados al finalizar este turno.
