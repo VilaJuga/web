@@ -50,22 +50,42 @@ export function renderCards(target, cards) {
 }
 
 export function renderTimeline(target, items) {
-  target.innerHTML = items
-    .map(
-      (item) => `
-      <article class="timeline-item ${item.side}">
-        <div class="timeline-chip">
-          <h3>${item.chipTitle}</h3>
-          <p>${item.chipText}</p>
-        </div>
-        <div class="timeline-content">
-          <h4>${item.contentTitle}</h4>
-          <p>${item.contentText}</p>
-        </div>
-      </article>
-    `
-    )
-    .join("");
+  target.innerHTML = `
+    <div class="wpr-timeline-centered wpr-line wpr-both-sided-timeline">
+      <div class="wpr-middle-line"></div>
+      <div class="wpr-timeline-fill" data-layout="centered"></div>
+      ${items
+        .map(
+          (item) => `
+        <article class="wpr-timeline-entry timeline-item ${
+          item.side === "left" ? "wpr-left-aligned" : "wpr-right-aligned"
+        }">
+          <time class="wpr-extra-label">
+            <span class="wpr-label">${item.label}</span>
+            <span class="wpr-sub-label">${item.subLabel}</span>
+          </time>
+          <div class="wpr-timeline-entry-inner">
+            <div class="wpr-main-line-icon wpr-icon">
+              <i aria-hidden="true" class="${item.iconClass}"></i>
+            </div>
+            <div class="wpr-story-info-vertical wpr-data-wrap">
+              <div class="wpr-timeline-content-wrapper">
+                <div class="wpr-content-wrapper">
+                  <div class="wpr-title-wrap">
+                    <span class="wpr-title">${item.title}</span>
+                  </div>
+                  <div class="wpr-description">
+                    <p>${item.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>`
+        )
+        .join("")}
+    </div>
+  `;
 }
 
 export function renderVisit(titleTarget, addressTarget, visitSection, visit) {

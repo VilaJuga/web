@@ -1,65 +1,116 @@
-﻿.timeline-section {
+.timeline-section {
   background: linear-gradient(180deg, #f8f8f8, #efefef);
 }
 
 .timeline {
   position: relative;
-  max-width: 980px;
+  max-width: 1060px;
   margin: 2rem auto 0;
 }
 
-.timeline::before {
-  content: "";
+.wpr-timeline-centered {
+  position: relative;
+}
+
+.wpr-middle-line {
   position: absolute;
   left: 50%;
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--line);
+  background: #d5d5d5;
   transform: translateX(-50%);
 }
 
-.timeline-item {
-  width: calc(50% - 1.6rem);
-  margin-bottom: 1.2rem;
+.wpr-timeline-entry {
+  position: relative;
+  width: 50%;
+  margin-bottom: 2rem;
   opacity: 0;
   transform: translateY(20px);
   transition: 0.45s ease;
 }
 
-.timeline-item.visible {
+.wpr-timeline-entry.visible {
   opacity: 1;
   transform: translateY(0);
 }
 
-.timeline-item.left {
-  margin-right: auto;
+.wpr-left-aligned {
+  padding-right: 3.2rem;
 }
 
-.timeline-item.right {
-  margin-left: auto;
+.wpr-right-aligned {
+  margin-left: 50%;
+  padding-left: 3.2rem;
 }
 
-.timeline-chip,
-.timeline-content {
-  background: #fff;
-  border: 1px solid #e4e4e4;
+.wpr-extra-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.93rem;
+}
+
+.wpr-left-aligned .wpr-extra-label {
+  text-align: right;
+}
+
+.wpr-right-aligned .wpr-extra-label {
+  text-align: left;
+}
+
+.wpr-label {
+  font-weight: 700;
+}
+
+.wpr-sub-label {
+  color: #5b5b5b;
+}
+
+.wpr-timeline-entry-inner {
+  position: relative;
+}
+
+.wpr-main-line-icon {
+  position: absolute;
+  top: 16px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid #d5d5d5;
+  color: #323232;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.wpr-left-aligned .wpr-main-line-icon {
+  right: -50px;
+}
+
+.wpr-right-aligned .wpr-main-line-icon {
+  left: -50px;
+}
+
+.wpr-data-wrap {
+  background: #ffffff;
+  border: 1px solid #e3e3e3;
   border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.1rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
 }
 
-.timeline-chip {
+.wpr-title {
+  display: inline-block;
+  font-weight: 700;
   margin-bottom: 0.55rem;
 }
 
-.timeline-chip h3,
-.timeline-content h4 {
-  margin-bottom: 0.5rem;
-}
-
-.timeline-chip p,
-.timeline-content p {
+.wpr-description p {
   margin: 0;
   font-size: 0.94rem;
 }

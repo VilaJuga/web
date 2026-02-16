@@ -7,14 +7,31 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .timeline::before {
+  .wpr-middle-line {
     left: 1rem;
     transform: none;
   }
 
-  .timeline-item {
+  .wpr-timeline-entry {
     width: calc(100% - 2.2rem);
     margin-left: 2.2rem;
+    padding-left: 2.6rem;
+    padding-right: 0;
+  }
+
+  .wpr-right-aligned {
+    margin-left: 2.2rem;
+  }
+
+  .wpr-left-aligned .wpr-extra-label,
+  .wpr-right-aligned .wpr-extra-label {
+    text-align: left;
+  }
+
+  .wpr-left-aligned .wpr-main-line-icon,
+  .wpr-right-aligned .wpr-main-line-icon {
+    left: -42px;
+    right: auto;
   }
 }
 

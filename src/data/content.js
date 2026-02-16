@@ -66,36 +66,40 @@ export const cards = [
 export const timelineItems = [
   {
     side: "left",
-    chipTitle: "Ludoteca de lliure accés",
-    chipText: "Amb més de 300 jocs de taula!",
-    contentTitle: "Jocs de taula de lliure accés",
-    contentText:
+    label: "Ludoteca de lliure accés",
+    subLabel: "Amb més de 300 jocs de taula!",
+    iconClass: "fas fa-dice",
+    title: "Jocs de taula de lliure accés",
+    description:
       "Amb la nostra ludoteca, on de manera gratuïta podreu demanar aquell joc que vulgueu provar, o bé deixar-vos assessorar pels membres de l'organització.",
   },
   {
     side: "right",
-    chipTitle: "Explicacions de jocs publicats",
-    chipText: "De mà de les pròpies editorials col·laboradores.",
-    contentTitle: "Demostracions de jocs de taula",
-    contentText:
+    label: "Explicacions de jocs publicats",
+    subLabel: "De mà de les pròpies editorials col·laboradores.",
+    iconClass: "fas fa-dice-d6",
+    title: "Demostracions de jocs de taula",
+    description:
       "Demostracions de prototips de jocs que encara no han estat publicats, explicats de la mà dels seus creadors.",
   },
   {
     side: "left",
-    chipTitle: "Wargames",
-    chipText:
+    label: "Wargames",
+    subLabel:
       "Per poder gaudir de jocs estratègics i de recreació de guerres amb miniatures.",
-    contentTitle: "Jocs de rol",
-    contentText:
+    iconClass: "fas fa-dice-d20",
+    title: "Jocs de rol",
+    description:
       "Deixa volar la teva imaginació i protagonitza una història narrada pels nostres col·laboradors i Directors de Joc!",
   },
   {
     side: "right",
-    chipTitle: "Jocs de NO taula",
-    chipText:
+    label: "Jocs de NO taula",
+    subLabel:
       "Amb tot un espai per seguir explorant maneres de divertir-se que no requereixen estar asseguts a taula.",
-    contentTitle: "Zona de jocs familiars",
-    contentText:
+    iconClass: "fas fa-dice-six",
+    title: "Zona de jocs familiars",
+    description:
       "Zona destinada a que els més petits puguin gaudir dels seus primers jocs de taula i explorar les seves capacitats motrius i sensorials.",
   },
 ];

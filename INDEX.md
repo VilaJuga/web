@@ -53,3 +53,16 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - La web mantiene la misma estructura y secciones ya clonadas, pero quitando añadidos no presentes originalmente.
   - Se conserva el bloque “Veniu a gaudir!” tal como pediste.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (timeline “Què s'hi inclou?” igualado al original)
+- Solicitud: dejar la sección “Què s'hi inclou?” 100% igual al original.
+- Cambios aplicados:
+  - `index.html`: añadido CSS de Font Awesome 5 para iconos idénticos de la línea temporal.
+  - `src/data/content.js`: el dataset del timeline ahora usa campos equivalentes al original (`label`, `subLabel`, `iconClass`, `title`, `description`).
+  - `src/scripts/modules/render.js`: render del timeline reescrito con estructura tipo WordPress/Elementor (`wpr-timeline-entry`, `wpr-extra-label`, `wpr-main-line-icon`, etc.).
+  - `src/styles/components/timeline.css`: estilos del timeline rehaciendo línea central, alternancia izquierda/derecha, etiquetas e iconos.
+  - `src/styles/responsive.css`: ajustes responsive específicos del nuevo timeline.
+- Funcionamiento:
+  - La sección “Què s'hi inclou?” ahora replica la jerarquía visual del original: etiqueta + subetiqueta, icono centrado en la línea y tarjeta de contenido alternada.
+  - Se mantienen los textos originales y la animación de aparición al scroll.
+- Git: commit y push realizados al finalizar este turno.
