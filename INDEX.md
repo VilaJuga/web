@@ -113,3 +113,24 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - Edita menú, slider, intro, galería, cards, timeline y sección final.
   - Guarda cambios y se aplican en `index.html` vía `localStorage`.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (admins múltiples + superadmin + editor simplificado)
+- Solicitud: simplificar el admin para que sea más fácil de editar y menos técnico; añadir admins extra y superadmin con control para inhabilitar admins.
+- Cambios aplicados:
+  - `src/scripts/admin.js`:
+    - Nuevo sistema de cuentas:
+      - Admins: `Marc/1701`, `Aleix/1234`, `Miriam/1234`, `Joan/1234`, `Miki/1234`, `Genís/1234`, `Sergi/1234`.
+      - Superadmin: `DaVinci/HVitruviano`.
+    - Login con roles (`admin`/`superadmin`) y bloqueo por estado de habilitación.
+    - Submenu de superadmin para habilitar/inhabilitar admins (persistente en `localStorage`).
+    - Formularios del editor con textos más simples y menos técnicos.
+    - Timeline con selector de icono amigable (sin editar clases CSS manuales).
+  - `admin.html`:
+    - Badge de rol visible.
+    - Panel exclusivo de superadmin para gestión de usuarios.
+  - `src/styles/admin.css`:
+    - Estilos para badge de rol, ayuda contextual y lista visual de admins.
+- Funcionamiento:
+  - Los admins normales editan contenido.
+  - El superadmin edita contenido y además puede inhabilitar/habilitar cuentas admin desde el propio panel.
+- Git: commit y push realizados al finalizar este turno.

@@ -30,14 +30,21 @@
       <header class="dash-head">
         <div>
           <h2>Editor Visual</h2>
-          <p>Panell de configuració completa de contingut.</p>
+          <p id="welcomeText">Panell de configuració completa de contingut.</p>
         </div>
         <div class="head-actions">
+          <span class="role-badge" id="roleBadge"></span>
           <button class="ghost" id="openSiteBtn" type="button">Obrir Web</button>
           <button class="ghost" id="resetBtn" type="button">Restaurar</button>
           <button class="primary" id="saveBtn" type="button">Guardar Canvis</button>
         </div>
       </header>
+
+      <section class="panel hidden" id="superAdminPanel">
+        <h3>Superadmin: Gestió d'admins</h3>
+        <p class="panel-help">Activa o desactiva qui pot entrar al panell d'edició.</p>
+        <div class="admin-users" id="adminUsers"></div>
+      </section>
 
       <div class="grid" id="editorRoot"></div>
       <div class="toast" id="toast"></div>
