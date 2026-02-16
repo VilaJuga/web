@@ -51,13 +51,14 @@ export function renderCards(target, cards) {
 
 export function renderTimeline(target, items) {
   target.innerHTML = `
-    <div class="wpr-timeline-centered wpr-line wpr-both-sided-timeline">
-      <div class="wpr-middle-line"></div>
-      <div class="wpr-timeline-fill" data-layout="centered"></div>
+    <div class="wpr-wrapper wpr-vertical wpr-centered">
+      <div class="wpr-timeline-centered wpr-line wpr-both-sided-timeline">
+        <div class="wpr-middle-line"></div>
+        <div class="wpr-timeline-fill" data-layout="centered"></div>
       ${items
         .map(
           (item) => `
-        <article class="wpr-timeline-entry timeline-item ${
+        <article class="wpr-timeline-entry ${
           item.side === "left" ? "wpr-left-aligned" : "wpr-right-aligned"
         }">
           <time class="wpr-extra-label">
@@ -81,9 +82,11 @@ export function renderTimeline(target, items) {
               </div>
             </div>
           </div>
-        </article>`
+        </article>
+      `
         )
         .join("")}
+      </div>
     </div>
   `;
 }

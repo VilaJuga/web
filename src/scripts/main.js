@@ -18,7 +18,6 @@ import {
 import { initMenu } from "./modules/menu.js";
 import { initSlider } from "./modules/slider.js";
 import { initBackToTop } from "./modules/backtop.js";
-import { initRevealAnimation } from "./modules/reveal.js";
 
 const mainNav = document.getElementById("mainNav");
 const hero = document.getElementById("hero");
@@ -43,4 +42,3 @@ renderVisit(visitTitle, visitAddress, visitSection, visit);
 initMenu(menuToggle, mainNav);
 initSlider(hero);
 initBackToTop(backTop);
-initRevealAnimation(".timeline-item");

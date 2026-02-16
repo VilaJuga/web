@@ -66,3 +66,15 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - La sección “Què s'hi inclou?” ahora replica la jerarquía visual del original: etiqueta + subetiqueta, icono centrado en la línea y tarjeta de contenido alternada.
   - Se mantienen los textos originales y la animación de aparición al scroll.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (ajuste final para clon exacto del timeline)
+- Solicitud: “hazlo IGUAL”.
+- Cambios aplicados:
+  - `index.html`: se cargan las mismas hojas de estilo base de Elementor y Royal Addons usadas por la web original para que el timeline use el mismo motor visual.
+  - `src/scripts/modules/render.js`: estructura del timeline adaptada al wrapper exacto (`wpr-wrapper wpr-vertical wpr-centered` + `wpr-timeline-centered ...`).
+  - `src/styles/components/timeline.css`: se eliminan overrides locales del timeline para no distorsionar el estilo original del widget.
+  - `src/styles/responsive.css`: se eliminan reglas responsive custom del timeline.
+  - `src/scripts/main.js`: se quita animación custom añadida al timeline.
+- Funcionamiento:
+  - El bloque “Què s'hi inclou?” queda renderizado con el marcado y estilos del mismo sistema de la web original, evitando aproximaciones propias.
+- Git: commit y push realizados al finalizar este turno.
