@@ -1,0 +1,19 @@
+﻿.container {
+  width: min(100% - 2rem, var(--max-w));
+  margin: 0 auto;
+}
+
+.section-gap {
+  padding: 4rem 0;
+}
+
+.divider {
+  width: 72px;
+  height: 3px;
+  background: var(--accent);
+  margin: 0.9rem 0 1.3rem;
+}
+
+.divider.center {
+  margin: 0.9rem auto 2rem;
+}

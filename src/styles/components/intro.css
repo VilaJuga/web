@@ -1,0 +1,23 @@
+﻿.intro {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+}
+
+.intro-gallery {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.intro-gallery img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  height: 220px;
+}
+
+.intro-gallery img.tall {
+  height: 450px;
+}

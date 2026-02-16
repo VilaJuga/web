@@ -1,0 +1,15 @@
+﻿.visit {
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+}
+
+.visit-content {
+  color: var(--text-light);
+  text-align: center;
+}
+
+.visit-content p {
+  margin: 0;
+  font-size: 1.05rem;
+}

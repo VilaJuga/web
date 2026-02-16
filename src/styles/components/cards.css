@@ -1,0 +1,31 @@
+﻿.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.2rem;
+}
+
+.card {
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+}
+
+.card img {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  height: 220px;
+}
+
+.card h3 {
+  padding: 1rem 1rem 0.2rem;
+  font-size: 1.1rem;
+}
+
+.card p {
+  padding: 0 1rem 1.2rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
