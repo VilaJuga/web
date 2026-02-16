@@ -7,6 +7,7 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
 - Qué archivos/carpetas modifiqué.
 - Cómo funciona lo nuevo.
 - Commit y push realizados.
+- Política activa adicional: subir siempre TODO lo que exista en el workspace (incluyendo archivos nuevos/no trackeados) cuando pidas subir cambios.
 
 ## Historial de cambios
 
@@ -87,4 +88,13 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - `src/styles/components/timeline.css`: se elimina override visual propio y se deja solo posicionamiento base para no interferir.
 - Funcionamiento:
   - El timeline usa las reglas originales de diseño del bloque en producción (márgenes, línea central, posición de labels/iconos y tipografías), mientras el resto conserva tu estructura actual.
+- Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (subir todo siempre)
+- Solicitud: “súbelo TODO, SIEMPRE”.
+- Cambios aplicados:
+  - Se versionan explícitamente también archivos no trackeados (`post-12.css`, `site_source.html`).
+  - Se añade la política de subida total en este `INDEX.md`.
+- Funcionamiento:
+  - A partir de esta instrucción, cuando pidas subir cambios se incluye todo el contenido actual del workspace.
 - Git: commit y push realizados al finalizar este turno.
