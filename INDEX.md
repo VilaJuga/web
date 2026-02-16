@@ -42,3 +42,14 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - `src/scripts/modules/backtop.js` gestiona el botón de volver arriba.
   - `src/styles/main.css` importa los estilos por módulos para mantener separación.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (ajuste de fidelidad visual)
+- Solicitud: no añadir cosas que no estaban en la web original; mantenerla igual en código (sin WordPress), conservando “Veniu a gaudir”.
+- Cambios aplicados:
+  - `index.html`: eliminado el bloque de marca extra en cabecera (`VilaJuga`) para no introducir elementos nuevos.
+  - `src/scripts/modules/render.js`: enlaces del menú sin `target="_blank"` para comportamiento más fiel.
+  - `src/styles/components/nav.css`: cabecera centrada y menú móvil ajustado sin depender de marca añadida.
+- Funcionamiento:
+  - La web mantiene la misma estructura y secciones ya clonadas, pero quitando añadidos no presentes originalmente.
+  - Se conserva el bloque “Veniu a gaudir!” tal como pediste.
+- Git: commit y push realizados al finalizar este turno.

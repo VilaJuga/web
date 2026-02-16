@@ -3,7 +3,7 @@
     .map(
       (link) => `
       <li>
-        <a class="${link.active ? "active" : ""}" href="${link.href}" target="_blank" rel="noopener noreferrer">${link.label}</a>
+        <a class="${link.active ? "active" : ""}" href="${link.href}">${link.label}</a>
       </li>`
     )
     .join("");
