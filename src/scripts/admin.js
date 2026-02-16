@@ -30,6 +30,7 @@ const editorRoot = document.getElementById("editorRoot");
 const saveBtn = document.getElementById("saveBtn");
 const resetBtn = document.getElementById("resetBtn");
 const openSiteBtn = document.getElementById("openSiteBtn");
+const logoutBtn = document.getElementById("logoutBtn");
 const toast = document.getElementById("toast");
 const roleBadge = document.getElementById("roleBadge");
 const welcomeText = document.getElementById("welcomeText");
@@ -37,7 +38,6 @@ const superAdminPanel = document.getElementById("superAdminPanel");
 const adminUsers = document.getElementById("adminUsers");
 
 let state = getSiteData();
-let currentAccount = null;
 let adminStatus = getAdminStatus();
 
 loginBtn.addEventListener("click", () => {
@@ -53,7 +53,7 @@ loginBtn.addEventListener("click", () => {
     return;
   }
 
-  currentAccount = account;
+  loginError.textContent = "";
   loginCard.classList.add("hidden");
   dashboard.classList.remove("hidden");
   roleBadge.textContent = account.role === "superadmin" ? "Superadmin" : "Admin";
@@ -64,6 +64,12 @@ loginBtn.addEventListener("click", () => {
   if (isSuper) renderSuperAdminPanel();
 
   renderEditor();
+});
+
+pwdInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    loginBtn.click();
+  }
 });
 
 saveBtn.addEventListener("click", () => {
@@ -79,6 +85,16 @@ resetBtn.addEventListener("click", () => {
 
 openSiteBtn.addEventListener("click", () => {
   window.open("./index.html", "_blank");
+});
+
+logoutBtn.addEventListener("click", () => {
+  dashboard.classList.add("hidden");
+  loginCard.classList.remove("hidden");
+  userInput.value = "";
+  pwdInput.value = "";
+  loginError.textContent = "";
+  roleBadge.textContent = "";
+  superAdminPanel.classList.add("hidden");
 });
 
 function renderSuperAdminPanel() {

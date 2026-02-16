@@ -134,3 +134,19 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - Los admins normales editan contenido.
   - El superadmin edita contenido y además puede inhabilitar/habilitar cuentas admin desde el propio panel.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (logout + diseño tipo Google Sites)
+- Solicitud: añadir “cerrar sesión” y hacer la interfaz de edición muy parecida al estilo Google Sites, hiper simple.
+- Cambios aplicados:
+  - `admin.html`:
+    - botón nuevo `Tancar sessió`.
+  - `src/scripts/admin.js`:
+    - lógica de cierre de sesión (volver al login y limpiar campos/estado visual).
+    - login también con tecla Enter en contraseña.
+  - `src/styles/admin.css`:
+    - rediseño completo a estética clara y minimalista (fondos blancos, bordes suaves, azul principal, jerarquía simple).
+    - simplificación visual de botones, paneles, formularios y listados.
+- Funcionamiento:
+  - El editor ahora es más limpio y directo para edición diaria.
+  - Puedes cerrar sesión desde el panel sin recargar página.
+- Git: commit y push realizados al finalizar este turno.
