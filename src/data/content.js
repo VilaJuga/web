@@ -1,11 +1,11 @@
 ﻿export const defaultSiteData = {
   navLinks: [
-    { label: "Inici", href: "https://www.vilajuga.org/", active: true },
-    { label: "Activitats 2026", href: "https://www.vilajuga.org/1957-2/" },
-    { label: "Ludoteca", href: "https://www.vilajuga.org/ludoteca/" },
-    { label: "Sobre Nosaltres", href: "https://www.vilajuga.org/about-us/" },
-    { label: "Contacta'ns", href: "https://www.vilajuga.org/services/" },
-    { label: "Com arribar", href: "https://www.vilajuga.org/projects/" }
+    { label: "Inici", href: "index.html", active: true },
+    { label: "Activitats 2026", href: "pages/actividades-2026.html" },
+    { label: "Ludoteca", href: "pages/ludoteca.html" },
+    { label: "Sobre Nosaltres", href: "pages/sobre-nosotros.html" },
+    { label: "Contacta'ns", href: "pages/contacto.html" },
+    { label: "Com arribar", href: "pages/como-llegar.html" }
   ],
   heroSlides: [
     "https://www.vilajuga.org/wp-content/uploads/2025/07/Disseny-web-banners-scaled.jpg",

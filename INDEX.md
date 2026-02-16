@@ -192,3 +192,30 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - El usuario edita directamente lo que ve en pantalla y ese resultado es el que se guarda.
   - Se conserva restaurar, guardar, abrir web y cerrar sesión.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (editor visual para toda la web)
+- Solicitud: ampliar para editar toda la web entera con experiencia de edición sobre la página, en castellano.
+- Cambios aplicados:
+  - `pages/`:
+    - nuevas copias locales de páginas del menú:
+      - `pages/actividades-2026.html`
+      - `pages/ludoteca.html`
+      - `pages/sobre-nosotros.html`
+      - `pages/contacto.html`
+      - `pages/como-llegar.html`
+  - `admin.html`:
+    - nuevo selector de página (`Inicio`, `Actividades 2026`, `Ludoteca`, etc.) para editar toda la web desde un único editor.
+  - `src/scripts/admin.js`:
+    - flujo WYSIWYG sobre iframe para múltiples páginas.
+    - edición directa por clic en textos/imágenes/fondos y guardado de cambios por página.
+    - mantenimiento de login admin/superadmin y gestión de usuarios admin.
+  - `src/scripts/page-edits-loader.js` (nuevo):
+    - script común que aplica automáticamente las ediciones guardadas a cada página en tiempo de carga.
+  - `index.html` y páginas en `pages/`:
+    - inyección del loader para que los cambios guardados se reflejen fuera del admin.
+  - `src/data/content.js`:
+    - enlaces del menú principal cambiados a rutas locales para navegar/editar el sitio completo clonado.
+- Funcionamiento:
+  - Puedes elegir cualquier página del sitio desde el selector superior del admin y editarla visualmente.
+  - Lo que guardas se aplica en esa página concreta cuando se abre normalmente.
+- Git: commit y push realizados al finalizar este turno.

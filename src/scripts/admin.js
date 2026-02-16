@@ -1,7 +1,7 @@
-﻿import { cloneDefaultSiteData } from "../data/content.js";
-import { getSiteData, saveSiteData, resetSiteData } from "./modules/data-store.js";
+﻿import { getSiteData, saveSiteData } from "./modules/data-store.js";
 
 const ADMIN_STATUS_KEY = "vilajuga_admin_status_v1";
+const PAGE_EDITS_KEY = "vilajuga_page_edits_v1";
 
 const ACCOUNTS = [
   { user: "Marc", pwd: "1701", role: "admin" },
@@ -14,6 +14,15 @@ const ACCOUNTS = [
   { user: "DaVinci", pwd: "HVitruviano", role: "superadmin" },
 ];
 
+const PAGES = [
+  { key: "index.html", label: "Inicio", url: "index.html" },
+  { key: "pages/actividades-2026.html", label: "Actividades 2026", url: "pages/actividades-2026.html" },
+  { key: "pages/ludoteca.html", label: "Ludoteca", url: "pages/ludoteca.html" },
+  { key: "pages/sobre-nosotros.html", label: "Sobre nosotros", url: "pages/sobre-nosotros.html" },
+  { key: "pages/contacto.html", label: "Contacto", url: "pages/contacto.html" },
+  { key: "pages/como-llegar.html", label: "Como llegar", url: "pages/como-llegar.html" },
+];
+
 const loginView = document.getElementById("loginView");
 const editorView = document.getElementById("editorView");
 const loginUser = document.getElementById("loginUser");
@@ -21,6 +30,7 @@ const loginPass = document.getElementById("loginPass");
 const loginBtn = document.getElementById("loginBtn");
 const loginError = document.getElementById("loginError");
 
+const pagePicker = document.getElementById("pagePicker");
 const siteFrame = document.getElementById("siteFrame");
 const sessionLabel = document.getElementById("sessionLabel");
 const roleBadge = document.getElementById("roleBadge");
@@ -36,7 +46,9 @@ const openSiteBtn = document.getElementById("openSiteBtn");
 const logoutBtn = document.getElementById("logoutBtn");
 
 let currentAccount = null;
+let currentPage = PAGES[0];
 let adminStatus = getAdminStatus();
+let editsStore = getEditsStore();
 let selected = null;
 
 loginBtn.addEventListener("click", onLogin);
@@ -44,18 +56,35 @@ loginPass.addEventListener("keydown", (e) => {
   if (e.key === "Enter") onLogin();
 });
 
-openSiteBtn.addEventListener("click", () => window.open("./index.html", "_blank"));
-
-resetBtn.addEventListener("click", () => {
-  resetSiteData();
+pagePicker.addEventListener("change", () => {
+  const next = PAGES.find((p) => p.key === pagePicker.value);
+  if (!next) return;
+  currentPage = next;
   loadFrame();
-  showToast("Contenido restaurado.");
+});
+
+openSiteBtn.addEventListener("click", () => {
+  window.open(currentPage.url, "_blank");
 });
 
 saveBtn.addEventListener("click", () => {
-  const data = collectDataFromFrame();
-  saveSiteData(data);
+  saveEditsStore(editsStore);
   showToast("Cambios guardados.");
+});
+
+resetBtn.addEventListener("click", () => {
+  if (!editsStore.pages[currentPage.key]) {
+    showToast("Esta página ya está limpia.");
+    return;
+  }
+
+  delete editsStore.pages[currentPage.key];
+  saveEditsStore(editsStore);
+  if (currentPage.key === "index.html") {
+    saveSiteData(getSiteData());
+  }
+  loadFrame();
+  showToast("Página restaurada.");
 });
 
 logoutBtn.addEventListener("click", () => {
@@ -93,107 +122,85 @@ function onLogin() {
   superAdminCard.classList.toggle("hidden", account.role !== "superadmin");
   if (account.role === "superadmin") renderAdminList();
 
+  renderPagePicker();
   loadFrame();
 }
 
+function renderPagePicker() {
+  pagePicker.innerHTML = PAGES.map((p) => `<option value="${p.key}">${p.label}</option>`).join("");
+  pagePicker.value = currentPage.key;
+}
+
 function loadFrame() {
-  siteFrame.src = "index.html";
+  selected = null;
+  selectionFields.innerHTML = "";
+  selectionHelp.textContent = "Haz clic en texto o imagen para editar.";
+  siteFrame.src = `${currentPage.url}?editor=${Date.now()}`;
+
   siteFrame.onload = () => {
-    enableInlineEditor(siteFrame.contentDocument);
-    selected = null;
-    selectionFields.innerHTML = "";
-    selectionHelp.textContent = "Haz clic en texto o imagen para editar.";
+    const doc = siteFrame.contentDocument;
+    if (!doc) return;
+    applyEditsToDoc(doc, currentPage.key);
+    wireEditable(doc);
   };
 }
 
-function enableInlineEditor(doc) {
-  if (!doc) return;
-
+function wireEditable(doc) {
   const style = doc.createElement("style");
   style.textContent = `
     .vj-editable { outline: 2px dashed transparent; outline-offset: 2px; cursor: text; }
     .vj-editable:hover { outline-color: #1a73e8; }
-    .vj-selected { outline: 2px solid #1a73e8 !important; background: rgba(26,115,232,0.06); }
+    .vj-selected { outline: 2px solid #1a73e8 !important; background: rgba(26,115,232,0.08); }
     img.vj-editable-img { outline: 2px dashed transparent; outline-offset: 2px; cursor: pointer; }
     img.vj-editable-img:hover { outline-color: #1a73e8; }
   `;
   doc.head.appendChild(style);
 
-  const textSelectors = [
-    "#mainNav a",
-    "#introTitle",
-    "#introDescription",
-    "#cardsGrid .card h3",
-    "#cardsGrid .card p",
-    "#timeline .wpr-label",
-    "#timeline .wpr-sub-label",
-    "#timeline .wpr-title",
-    "#timeline .wpr-description p",
-    "#visitTitle",
-    "#visitAddress",
-  ];
+  const textNodes = doc.querySelectorAll("h1,h2,h3,h4,h5,h6,p,span,a,li,button,strong,em,small,label");
+  textNodes.forEach((el) => {
+    if (!el.textContent.trim()) return;
+    if (el.closest("script,style,noscript")) return;
 
-  textSelectors.forEach((selector) => {
-    doc.querySelectorAll(selector).forEach((el) => {
-      el.classList.add("vj-editable");
-      el.setAttribute("contenteditable", "true");
-      el.setAttribute("spellcheck", "false");
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        selectElement(el, "text");
-      });
-      if (el.tagName === "A") {
-        el.addEventListener("click", (e) => e.preventDefault());
-      }
-    });
-  });
-
-  const imageSelectors = [
-    "#introGallery img",
-    "#cardsGrid .card img",
-  ];
-
-  imageSelectors.forEach((selector) => {
-    doc.querySelectorAll(selector).forEach((el) => {
-      el.classList.add("vj-editable-img");
-      el.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        selectElement(el, "image");
-      });
-    });
-  });
-
-  doc.querySelectorAll("#hero .hero-slide").forEach((el) => {
-    el.style.cursor = "pointer";
+    el.classList.add("vj-editable");
     el.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      selectElement(el, "text");
+    });
+  });
+
+  doc.querySelectorAll("img").forEach((img) => {
+    img.classList.add("vj-editable-img");
+    img.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      selectElement(img, "image");
+    });
+  });
+
+  doc.querySelectorAll("section,div,header,main,footer").forEach((el) => {
+    const bg = getComputedStyle(el).backgroundImage;
+    if (!bg || bg === "none") return;
+
+    el.addEventListener("click", (e) => {
+      if (e.target !== el) return;
       e.preventDefault();
       e.stopPropagation();
       selectElement(el, "background-image");
     });
   });
 
-  const visit = doc.querySelector("#visit");
-  if (visit) {
-    visit.style.cursor = "pointer";
-    visit.addEventListener("click", (e) => {
-      if (e.target.closest("#visitTitle") || e.target.closest("#visitAddress")) return;
-      e.preventDefault();
-      e.stopPropagation();
-      selectElement(visit, "background-image");
-    });
-  }
-
   doc.addEventListener("click", () => {
     clearSelection();
+    selectionFields.innerHTML = "";
+    selectionHelp.textContent = "Haz clic en texto o imagen para editar.";
   });
 }
 
 function selectElement(el, type) {
   clearSelection();
-  selected = { el, type };
-  el.classList.add("vj-selected");
+  selected = { el, type, path: getElementPath(el) };
+  selected.el.classList.add("vj-selected");
   renderInspector();
 }
 
@@ -212,96 +219,104 @@ function renderInspector() {
     if (selected.el.tagName === "A") {
       selectionFields.appendChild(field("Enlace", selected.el.getAttribute("href") || "", (v) => {
         selected.el.setAttribute("href", v);
+        upsertEdit({ type: "text", text: selected.el.textContent, href: v });
       }));
     }
 
     selectionFields.appendChild(fieldArea("Texto", selected.el.textContent.trim(), (v) => {
       selected.el.textContent = v;
+      upsertEdit({ type: "text", text: v, href: selected.el.getAttribute("href") || "" });
     }));
     return;
   }
 
   if (selected.type === "image") {
     selectionHelp.textContent = "Imagen seleccionada.";
+
     selectionFields.appendChild(field("URL imagen", selected.el.getAttribute("src") || "", (v) => {
       selected.el.setAttribute("src", v);
+      upsertEdit({ type: "image", src: v, alt: selected.el.getAttribute("alt") || "" });
+      refreshThumb(v);
     }));
+
     selectionFields.appendChild(field("Texto alternativo", selected.el.getAttribute("alt") || "", (v) => {
       selected.el.setAttribute("alt", v);
+      upsertEdit({ type: "image", src: selected.el.getAttribute("src") || "", alt: v });
     }));
 
     const img = document.createElement("img");
     img.className = "thumb";
     img.src = selected.el.getAttribute("src") || "";
+    img.id = "selectionThumb";
     selectionFields.appendChild(img);
     return;
   }
 
   if (selected.type === "background-image") {
-    selectionHelp.textContent = "Imagen de fondo seleccionada.";
-    const current = extractUrl(selected.el.style.backgroundImage || "");
+    selectionHelp.textContent = "Fondo seleccionado.";
+    const current = extractUrl(selected.el.style.backgroundImage || getComputedStyle(selected.el).backgroundImage);
     selectionFields.appendChild(field("URL imagen de fondo", current, (v) => {
       selected.el.style.backgroundImage = `url('${v}')`;
+      upsertEdit({ type: "background-image", url: v });
     }));
   }
 }
 
-function collectDataFromFrame() {
-  const doc = siteFrame.contentDocument;
-  const defaults = cloneDefaultSiteData();
+function refreshThumb(url) {
+  const img = document.getElementById("selectionThumb");
+  if (img) img.src = url;
+}
 
-  const data = cloneDefaultSiteData();
+function upsertEdit(payload) {
+  if (!selected) return;
+  editsStore.pages[currentPage.key] ||= {};
+  editsStore.pages[currentPage.key][selected.path] = payload;
+}
 
-  const nav = [...doc.querySelectorAll("#mainNav a")].map((a, i) => ({
-    label: a.textContent.trim(),
-    href: a.getAttribute("href") || defaults.navLinks[i]?.href || "#",
-    active: a.classList.contains("active"),
-  }));
-  if (nav.length) data.navLinks = nav;
+function applyEditsToDoc(doc, pageKey) {
+  const edits = editsStore.pages[pageKey];
+  if (!edits) return;
 
-  const slides = [...doc.querySelectorAll("#hero .hero-slide")].map((el, i) =>
-    extractUrl(el.style.backgroundImage || "") || defaults.heroSlides[i] || ""
-  );
-  if (slides.length) data.heroSlides = slides;
+  Object.entries(edits).forEach(([path, edit]) => {
+    const el = doc.querySelector(path);
+    if (!el) return;
 
-  data.intro.title = (doc.querySelector("#introTitle")?.textContent || defaults.intro.title).trim();
-  data.intro.description = (doc.querySelector("#introDescription")?.textContent || defaults.intro.description).trim();
+    if (edit.type === "text") {
+      if (typeof edit.text === "string") el.textContent = edit.text;
+      if (el.tagName === "A" && typeof edit.href === "string") el.setAttribute("href", edit.href);
+      return;
+    }
 
-  const introGallery = [...doc.querySelectorAll("#introGallery img")].map((img, i) => ({
-    src: img.getAttribute("src") || defaults.introGallery[i]?.src || "",
-    alt: img.getAttribute("alt") || defaults.introGallery[i]?.alt || "",
-    tall: img.classList.contains("tall"),
-  }));
-  if (introGallery.length) data.introGallery = introGallery;
+    if (edit.type === "image") {
+      if (typeof edit.src === "string") el.setAttribute("src", edit.src);
+      if (typeof edit.alt === "string") el.setAttribute("alt", edit.alt);
+      return;
+    }
 
-  const cards = [...doc.querySelectorAll("#cardsGrid .card")].map((card, i) => ({
-    title: (card.querySelector("h3")?.textContent || defaults.cards[i]?.title || "").trim(),
-    text: (card.querySelector("p")?.textContent || defaults.cards[i]?.text || "").trim(),
-    image: card.querySelector("img")?.getAttribute("src") || defaults.cards[i]?.image || "",
-    alt: card.querySelector("img")?.getAttribute("alt") || defaults.cards[i]?.alt || "",
-  }));
-  if (cards.length) data.cards = cards;
+    if (edit.type === "background-image" && typeof edit.url === "string") {
+      el.style.backgroundImage = `url('${edit.url}')`;
+    }
+  });
+}
 
-  const timeline = [...doc.querySelectorAll("#timeline .wpr-timeline-entry")].map((entry, i) => ({
-    side: entry.classList.contains("wpr-left-aligned") ? "left" : "right",
-    label: (entry.querySelector(".wpr-label")?.textContent || defaults.timelineItems[i]?.label || "").trim(),
-    subLabel: (entry.querySelector(".wpr-sub-label")?.textContent || defaults.timelineItems[i]?.subLabel || "").trim(),
-    iconClass: entry.querySelector(".wpr-main-line-icon i")?.className || defaults.timelineItems[i]?.iconClass || "fas fa-dice",
-    title: (entry.querySelector(".wpr-title")?.textContent || defaults.timelineItems[i]?.title || "").trim(),
-    description: (entry.querySelector(".wpr-description p")?.textContent || defaults.timelineItems[i]?.description || "").trim(),
-  }));
-  if (timeline.length) data.timelineItems = timeline;
+function getEditsStore() {
+  try {
+    const raw = localStorage.getItem(PAGE_EDITS_KEY);
+    if (!raw) return { version: 1, pages: {} };
+    const parsed = JSON.parse(raw);
+    return { version: 1, pages: parsed.pages || {} };
+  } catch (_err) {
+    return { version: 1, pages: {} };
+  }
+}
 
-  data.visit.title = (doc.querySelector("#visitTitle")?.textContent || defaults.visit.title).trim();
-  data.visit.address = (doc.querySelector("#visitAddress")?.textContent || defaults.visit.address).trim();
-  data.visit.backgroundImage =
-    extractUrl(doc.querySelector("#visit")?.style.background || "") || defaults.visit.backgroundImage;
-
-  return data;
+function saveEditsStore(store) {
+  localStorage.setItem(PAGE_EDITS_KEY, JSON.stringify(store));
 }
 
 function renderAdminList() {
   adminUserList.innerHTML = "";
+
   ACCOUNTS.filter((a) => a.role === "admin").forEach((admin) => {
     const row = document.createElement("div");
     row.className = "switch-row";
@@ -313,6 +328,7 @@ function renderAdminList() {
       saveAdminStatus(adminStatus);
       renderAdminList();
     });
+
     adminUserList.appendChild(row);
   });
 }
@@ -331,6 +347,23 @@ function fieldArea(label, value, onInput) {
   wrap.innerHTML = `<label>${label}</label><textarea>${escapeHtml(value || "")}</textarea>`;
   wrap.querySelector("textarea").addEventListener("input", (e) => onInput(e.target.value));
   return wrap;
+}
+
+function getElementPath(el) {
+  const parts = [];
+  let node = el;
+  while (node && node.nodeType === 1 && node.tagName.toLowerCase() !== "html") {
+    const parent = node.parentElement;
+    if (!parent) break;
+
+    const index = [...parent.children].indexOf(node) + 1;
+    parts.unshift(`${node.tagName.toLowerCase()}:nth-child(${index})`);
+
+    if (node.tagName.toLowerCase() === "body") break;
+    node = parent;
+  }
+
+  return parts.join(" > ");
 }
 
 function findAccount(inputUser, inputPwd) {
