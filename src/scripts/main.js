@@ -1,12 +1,4 @@
-﻿import {
-  navLinks,
-  heroSlides,
-  intro,
-  introGallery,
-  cards,
-  timelineItems,
-  visit,
-} from "../data/content.js";
+﻿import { getSiteData } from "./modules/data-store.js";
 import {
   renderNav,
   renderHero,
@@ -18,6 +10,8 @@ import {
 import { initMenu } from "./modules/menu.js";
 import { initSlider } from "./modules/slider.js";
 import { initBackToTop } from "./modules/backtop.js";
+
+const siteData = getSiteData();
 
 const mainNav = document.getElementById("mainNav");
 const hero = document.getElementById("hero");
@@ -32,12 +26,12 @@ const visitAddress = document.getElementById("visitAddress");
 const menuToggle = document.querySelector(".menu-toggle");
 const backTop = document.getElementById("backTop");
 
-renderNav(mainNav, navLinks);
-renderHero(hero, heroSlides);
-renderIntro(introTitle, introDescription, introGalleryTarget, intro, introGallery);
-renderCards(cardsGrid, cards);
-renderTimeline(timeline, timelineItems);
-renderVisit(visitTitle, visitAddress, visitSection, visit);
+renderNav(mainNav, siteData.navLinks);
+renderHero(hero, siteData.heroSlides);
+renderIntro(introTitle, introDescription, introGalleryTarget, siteData.intro, siteData.introGallery);
+renderCards(cardsGrid, siteData.cards);
+renderTimeline(timeline, siteData.timelineItems);
+renderVisit(visitTitle, visitAddress, visitSection, siteData.visit);
 
 initMenu(menuToggle, mainNav);
 initSlider(hero);

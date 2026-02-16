@@ -98,3 +98,18 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
 - Funcionamiento:
   - A partir de esta instrucción, cuando pidas subir cambios se incluye todo el contenido actual del workspace.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-16 (admin visual completo)
+- Solicitud: añadir un admin visual/gráfico para modificar toda la interfaz normal de la web, con credenciales `Marc` / `1701`.
+- Cambios aplicados:
+  - `admin.html`: nuevo panel de administración con login y dashboard visual.
+  - `src/styles/admin.css`: estilo completo del admin (layout visual, paneles, repetidores, previews y feedback).
+  - `src/scripts/admin.js`: lógica de autenticación, edición por bloques, guardado/restauración y acciones de panel.
+  - `src/scripts/modules/data-store.js`: capa de persistencia en `localStorage` (`get/save/reset`) para datos del sitio.
+  - `src/data/content.js`: refactor a `defaultSiteData` + clonado seguro.
+  - `src/scripts/main.js`: la web principal ahora se renderiza desde datos persistidos, no solo hardcode.
+- Funcionamiento:
+  - Entra en `admin.html` con usuario `Marc` y contraseña `1701`.
+  - Edita menú, slider, intro, galería, cards, timeline y sección final.
+  - Guarda cambios y se aplican en `index.html` vía `localStorage`.
+- Git: commit y push realizados al finalizar este turno.

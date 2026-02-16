@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="ca">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VilaJuga Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="src/styles/admin.css" />
+</head>
+<body>
+  <div class="admin-bg"></div>
+
+  <main class="admin-shell">
+    <section class="login-card" id="loginCard">
+      <h1>VilaJuga Admin</h1>
+      <p>Edita tota la interfície de la web amb canvis visuals.</p>
+      <label>Usuari
+        <input id="user" type="text" autocomplete="username" />
+      </label>
+      <label>Contrasenya
+        <input id="pwd" type="password" autocomplete="current-password" />
+      </label>
+      <button id="loginBtn" type="button">Entrar</button>
+      <p class="error" id="loginError"></p>
+    </section>
+
+    <section class="dashboard hidden" id="dashboard">
+      <header class="dash-head">
+        <div>
+          <h2>Editor Visual</h2>
+          <p>Panell de configuració completa de contingut.</p>
+        </div>
+        <div class="head-actions">
+          <button class="ghost" id="openSiteBtn" type="button">Obrir Web</button>
+          <button class="ghost" id="resetBtn" type="button">Restaurar</button>
+          <button class="primary" id="saveBtn" type="button">Guardar Canvis</button>
+        </div>
+      </header>
+
+      <div class="grid" id="editorRoot"></div>
+      <div class="toast" id="toast"></div>
+    </section>
+  </main>
+
+  <script type="module" src="src/scripts/admin.js"></script>
+</body>
+</html>
