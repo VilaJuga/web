@@ -285,3 +285,13 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - El código común de persistencia visual queda aislado en `shared/`.
   - El editor sigue aplicando cambios sobre toda la web principal sin romper compatibilidad.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-20 (hotfix acceso a web principal y editor)
+- Incidencia: tras la reorganización por carpetas no existían puntos de entrada en raíz, por eso no abrían ni la web ni el editor al usar rutas antiguas.
+- Corrección aplicada:
+  - `index.html` (raíz) creado como redirección automática a `main/index.html`.
+  - `admin.html` (raíz) creado como redirección automática a `editor/admin.html`.
+- Funcionamiento:
+  - Accesos antiguos vuelven a funcionar inmediatamente.
+  - Se mantiene la estructura en carpetas (`main/`, `editor/`, `shared/`) sin romper compatibilidad.
+- Git: commit y push realizados al finalizar este turno.
