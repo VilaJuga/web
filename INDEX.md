@@ -219,3 +219,42 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - Puedes elegir cualquier página del sitio desde el selector superior del admin y editarla visualmente.
   - Lo que guardas se aplica en esa página concreta cuando se abre normalmente.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-20 (editor visual tipo Google Sites para toda la web)
+- Solicitud: crear un editor visual muy simple e intuitivo (estilo Google Sites) para editar toda la web copiada de `vilajuga.org`, sin tocar código, con bloques, preview, autosave, atajos y gestión por páginas.
+- Cambios aplicados:
+  - `admin.html`:
+    - rediseño completo del editor en split-screen:
+      - toolbar superior (modo edición, guardar, preview, configuración, deshacer/rehacer, usuario),
+      - sidebar con pestañas `AÑADIR BLOQUES`, `ESTRUCTURA`, `PÁGINAS`,
+      - canvas central con `iframe` editable,
+      - panel derecho de configuración del bloque,
+      - toolbar flotante de texto,
+      - modal gestor de imágenes,
+      - modal de vista previa responsive,
+      - modal de configuración de página.
+  - `src/styles/admin.css`:
+    - nuevo sistema visual completo del editor (colores, layout, botones, modales, sidebar/canvas/panel derecho, responsive tablet/móvil).
+  - `src/scripts/admin.js`:
+    - reimplementación completa de lógica del editor:
+      - login de admins/superadmin,
+      - edición visual sobre la propia página (WYSIWYG en iframe),
+      - edición inline de texto con barra flotante,
+      - biblioteca de bloques (básicos + específicos Vilajuga) e inserción visual,
+      - estructura de bloques con selección/mostrar-ocultar,
+      - pestaña páginas con cambio, borradores y duplicado,
+      - panel de configuración contextual por elemento/bloque,
+      - gestor de imágenes (subida + biblioteca en localStorage),
+      - auto-guardado cada 30s,
+      - guardado manual y versiones (últimas 10),
+      - deshacer/rehacer,
+      - copiar/pegar/duplicar/eliminar bloque,
+      - atajos de teclado (`Ctrl/Cmd+S`, `Z`, `Shift+Z`, `C`, `V`, `D`, `K`, `Esc`, `Delete`).
+  - `src/scripts/page-edits-loader.js`:
+    - ampliado para aplicar tanto el formato antiguo (`vilajuga_page_edits_v1`) como el nuevo (`vilajuga_visual_editor_v3`) en páginas públicas.
+- Funcionamiento:
+  - El editor permite editar textos e imágenes directamente sobre la web que se ve en pantalla.
+  - Se pueden añadir bloques de noticia, evento, miembro y galería, además de bloques básicos.
+  - Los cambios se guardan automáticamente y se reflejan en las páginas fuera del admin mediante el loader.
+  - El superadmin mantiene control para habilitar/deshabilitar administradores dentro de configuración.
+- Git: commit y push realizados al finalizar este turno.

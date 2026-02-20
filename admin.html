@@ -6,14 +6,14 @@
   <title>Editor visual - VilaJuga</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="src/styles/admin.css" />
 </head>
 <body>
   <main id="loginView" class="login-view">
     <section class="login-card">
-      <h1>Editor visual</h1>
-      <p>Edita la web como en Google Sites: viendo el resultado en tiempo real.</p>
+      <h1>Editor visual VilaJuga</h1>
+      <p>Edita la web igual que la ves, sin tocar código.</p>
       <label>Usuario
         <input id="loginUser" type="text" autocomplete="username" />
       </label>
@@ -26,41 +26,178 @@
   </main>
 
   <section id="editorView" class="editor-view hidden">
-    <header class="editor-topbar">
-      <div class="top-left">
-        <strong>VilaJuga - Editor visual</strong>
-        <span id="sessionLabel"></span>
+    <header class="topbar">
+      <div class="topbar-left">
+        <div class="brand">VilaJuga</div>
+        <div class="mode-pill"><span class="dot"></span> 📝 Modo Edición</div>
+        <div id="saveState" class="save-state">💾 Sin cambios</div>
       </div>
-      <div class="top-actions">
-        <span id="roleBadge" class="role-badge"></span>
-        <select id="pagePicker" class="page-picker"></select>
-        <button class="btn ghost" id="openSiteBtn" type="button">Abrir web</button>
-        <button class="btn ghost" id="resetBtn" type="button">Restaurar</button>
-        <button class="btn primary" id="saveBtn" type="button">Guardar</button>
-        <button class="btn danger" id="logoutBtn" type="button">Cerrar sesión</button>
+      <div class="topbar-actions">
+        <button id="undoBtn" class="btn ghost" type="button">↩️ Deshacer</button>
+        <button id="redoBtn" class="btn ghost" type="button">↪️ Rehacer</button>
+        <button id="configBtn" class="btn ghost" type="button">⚙️ Configuración</button>
+        <button id="previewBtn" class="btn ghost" type="button">👁️ Vista Previa</button>
+        <button id="saveBtn" class="btn success" type="button">💾 Guardar</button>
+        <div class="user-menu-wrap">
+          <button id="userMenuBtn" class="btn ghost" type="button">👤 <span id="sessionLabel"></span></button>
+          <div id="userDropdown" class="dropdown hidden">
+            <div id="roleBadge" class="role"></div>
+            <button id="logoutBtn" type="button">Cerrar sesión</button>
+          </div>
+        </div>
       </div>
     </header>
 
-    <main class="editor-layout">
-      <section class="canvas-wrap">
-        <div class="canvas-hint">Haz clic en cualquier texto o imagen para editarlo</div>
-        <iframe id="siteFrame" src="index.html" title="Vista previa editable"></iframe>
+    <main class="workspace">
+      <aside class="sidebar">
+        <div class="tab-head">
+          <button class="tab-btn active" data-tab="blocks" type="button">AÑADIR BLOQUES</button>
+          <button class="tab-btn" data-tab="structure" type="button">ESTRUCTURA</button>
+          <button class="tab-btn" data-tab="pages" type="button">PÁGINAS</button>
+        </div>
+
+        <section id="tabBlocks" class="tab-panel active">
+          <input id="blockSearch" class="search" type="search" placeholder="🔍 Buscar bloques" />
+          <p class="section-title">CONTENIDO BÁSICO</p>
+          <div id="basicBlockList" class="block-list"></div>
+          <p class="section-title">ESPECÍFICO VILAJUGA</p>
+          <div id="vilajugaBlockList" class="block-list"></div>
+        </section>
+
+        <section id="tabStructure" class="tab-panel">
+          <div class="sidebar-top-row">
+            <span>Bloques de la página</span>
+            <button id="refreshStructureBtn" class="mini-btn" type="button">Actualizar</button>
+          </div>
+          <div id="structureTree" class="structure-tree"></div>
+        </section>
+
+        <section id="tabPages" class="tab-panel">
+          <div class="sidebar-top-row">
+            <span>Páginas</span>
+            <button id="newPageBtn" class="mini-btn" type="button">+ Nueva</button>
+          </div>
+          <div id="pageList" class="page-list"></div>
+        </section>
+      </aside>
+
+      <section class="canvas-shell">
+        <div class="canvas-toolbar">
+          <label>Página actual:
+            <select id="pagePicker"></select>
+          </label>
+          <span class="canvas-help">Haz click en cualquier texto o imagen para editar</span>
+        </div>
+        <div class="canvas-wrap">
+          <iframe id="siteFrame" src="index.html" title="Vista editable"></iframe>
+        </div>
       </section>
 
-      <aside class="inspector">
-        <div class="inspector-card">
-          <h2>Propiedades</h2>
-          <p class="muted" id="selectionHelp">Selecciona un elemento en la página para editarlo.</p>
-          <div id="selectionFields"></div>
-        </div>
-
-        <div class="inspector-card hidden" id="superAdminCard">
-          <h2>Usuarios admin</h2>
-          <p class="muted">Activa o desactiva quién puede entrar al editor.</p>
-          <div id="adminUserList"></div>
-        </div>
+      <aside id="configPanel" class="config-panel hidden">
+        <header>
+          <button id="backConfigBtn" type="button">← Volver</button>
+          <div>
+            <strong id="configType">Configuración</strong>
+          </div>
+          <button id="closeConfigBtn" type="button">✗</button>
+        </header>
+        <div id="configBody" class="config-body"></div>
+        <button id="applyConfigBtn" class="btn apply" type="button">Aplicar cambios</button>
       </aside>
     </main>
+
+    <div id="inlineToolbar" class="inline-toolbar hidden">
+      <button data-cmd="bold" type="button"><b>B</b></button>
+      <button data-cmd="italic" type="button"><i>I</i></button>
+      <button data-cmd="underline" type="button"><u>U</u></button>
+      <span class="sep"></span>
+      <button data-heading="h1" type="button">H1</button>
+      <button data-heading="h2" type="button">H2</button>
+      <button data-heading="h3" type="button">H3</button>
+      <span class="sep"></span>
+      <button id="linkBtn" type="button">🔗</button>
+      <input id="colorPicker" type="color" value="#000000" />
+      <span class="sep"></span>
+      <button data-align="left" type="button">←</button>
+      <button data-align="center" type="button">⊟</button>
+      <button data-align="right" type="button">→</button>
+      <span class="sep"></span>
+      <button id="inlineAccept" type="button">✓</button>
+      <button id="inlineCancel" type="button">✗</button>
+    </div>
+
+    <div id="imageModal" class="modal hidden">
+      <div class="modal-card image-manager">
+        <header>
+          <h3>🖼️ GESTOR DE IMÁGENES</h3>
+          <button class="modal-close" data-close-modal="imageModal" type="button">✗</button>
+        </header>
+        <div class="modal-tabs">
+          <button class="modal-tab active" data-image-tab="upload" type="button">SUBIR NUEVA</button>
+          <button class="modal-tab" data-image-tab="library" type="button">BIBLIOTECA</button>
+        </div>
+        <section id="imageUploadTab" class="modal-panel active">
+          <label id="dropZone" class="drop-zone">
+            <input id="imageInput" type="file" accept="image/png,image/jpeg,image/gif,image/webp" multiple hidden />
+            <span>Arrastra imagen aquí o haz click para seleccionar (máx 5MB)</span>
+          </label>
+          <div id="uploadPreview" class="upload-preview"></div>
+        </section>
+        <section id="imageLibraryTab" class="modal-panel">
+          <input id="imageSearch" type="search" placeholder="Buscar por nombre" />
+          <div id="imageLibraryGrid" class="image-grid"></div>
+        </section>
+        <footer>
+          <button id="selectImageBtn" class="btn primary" type="button">Seleccionar</button>
+          <button class="btn ghost" data-close-modal="imageModal" type="button">Cancelar</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="previewModal" class="modal hidden">
+      <div class="modal-card preview-card">
+        <header>
+          <h3>👁️ VISTA PREVIA</h3>
+          <div class="device-switch">
+            <button class="device-btn active" data-device="desktop" type="button">Desktop</button>
+            <button class="device-btn" data-device="tablet" type="button">Tablet</button>
+            <button class="device-btn" data-device="mobile" type="button">Mobile</button>
+          </div>
+          <button class="modal-close" data-close-modal="previewModal" type="button">✗</button>
+        </header>
+        <div class="preview-stage">
+          <iframe id="previewFrame" src="index.html" title="Vista previa"></iframe>
+        </div>
+        <footer>
+          <button class="btn ghost" data-close-modal="previewModal" type="button">← Seguir editando</button>
+          <button id="publishBtn" class="btn primary" type="button">✓ Publicar cambios</button>
+        </footer>
+      </div>
+    </div>
+
+    <div id="pageSettingsModal" class="modal hidden">
+      <div class="modal-card">
+        <header>
+          <h3>⚙️ Configuración de página</h3>
+          <button class="modal-close" data-close-modal="pageSettingsModal" type="button">✗</button>
+        </header>
+        <div class="form-grid">
+          <label>Título
+            <input id="pageTitleInput" type="text" />
+          </label>
+          <label>URL amigable
+            <input id="pageSlugInput" type="text" />
+          </label>
+          <label class="full">Meta descripción
+            <textarea id="pageMetaInput" rows="3"></textarea>
+          </label>
+        </div>
+        <footer>
+          <button id="savePageSettingsBtn" class="btn primary" type="button">Guardar configuración</button>
+          <button class="btn ghost" data-close-modal="pageSettingsModal" type="button">Cancelar</button>
+        </footer>
+      </div>
+    </div>
 
     <div id="toast" class="toast"></div>
   </section>
