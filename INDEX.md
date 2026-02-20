@@ -306,3 +306,15 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
 - Funcionamiento:
   - `DaVinci / HVitruviano` funciona aunque se escriba con variaciones de mayúsculas y/o espacios accidentales.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-20 (login estricto + acceso DaVinci garantizado)
+- Solicitud: login muy estricto, pero que `DaVinci / HVitruviano` funcione.
+- Corrección aplicada:
+  - `editor/src/scripts/admin.js`:
+    - `findAccount` ahora usa comparación estricta exacta (`===`) para usuario y contraseña.
+    - se añade validación explícita prioritaria de `DaVinci` + `HVitruviano` para garantizar ese acceso exacto.
+    - se eliminan normalizaciones flexibles anteriores.
+- Funcionamiento:
+  - Login vuelve a ser estricto (respeta mayúsculas/minúsculas y caracteres exactos).
+  - Credenciales exactas del superadmin funcionan con prioridad.
+- Git: commit y push realizados al finalizar este turno.

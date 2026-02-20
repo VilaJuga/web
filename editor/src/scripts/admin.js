@@ -1538,24 +1538,14 @@ function saveAdminStatus() {
 }
 
 function findAccount(inputUser, inputPwd) {
-  const normalized = normalizeUser(inputUser);
-  const normalizedPwd = normalizePwd(inputPwd);
-  return ACCOUNTS.find((account) => normalizeUser(account.user) === normalized && normalizePwd(account.pwd) === normalizedPwd);
-}
+  const user = String(inputUser || "");
+  const pwd = String(inputPwd || "");
 
-function normalizeUser(value) {
-  return String(value || "")
-    .trim()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+/g, "")
-    .toLowerCase();
-}
+  if (user === "DaVinci" && pwd === "HVitruviano") {
+    return ACCOUNTS.find((account) => account.user === "DaVinci" && account.pwd === "HVitruviano");
+  }
 
-function normalizePwd(value) {
-  return String(value || "")
-    .trim()
-    .toLowerCase();
+  return ACCOUNTS.find((account) => account.user === user && account.pwd === pwd);
 }
 function section(title) {
   const wrap = document.createElement("section");
