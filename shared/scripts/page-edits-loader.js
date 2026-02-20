@@ -4,11 +4,10 @@
 
   function getPageKey() {
     const pathname = window.location.pathname.replace(/\\/g, "/");
-    if (pathname.includes("/pages/")) return pathname.substring(pathname.indexOf("/pages/") + 1);
-    if (pathname.endsWith("/index.html") || pathname === "/" || pathname === "") return "index.html";
+    if (pathname.endsWith("/")) return "main/index.html";
     const clean = pathname.replace(/^\//, "");
     if (clean.endsWith(".html")) return clean;
-    return "index.html";
+    return "main/index.html";
   }
 
   function applyLegacy(pageKey) {

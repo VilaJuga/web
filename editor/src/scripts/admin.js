@@ -15,12 +15,12 @@ const ACCOUNTS = [
 ];
 
 const BASE_PAGES = [
-  { key: "index.html", label: "Inicio", url: "index.html", status: "publicada" },
-  { key: "pages/actividades-2026.html", label: "Actividades 2026", url: "pages/actividades-2026.html", status: "publicada" },
-  { key: "pages/ludoteca.html", label: "Ludoteca", url: "pages/ludoteca.html", status: "publicada" },
-  { key: "pages/sobre-nosotros.html", label: "Sobre nosotros", url: "pages/sobre-nosotros.html", status: "publicada" },
-  { key: "pages/contacto.html", label: "Contacto", url: "pages/contacto.html", status: "publicada" },
-  { key: "pages/como-llegar.html", label: "Como llegar", url: "pages/como-llegar.html", status: "publicada" },
+  { key: "main/index.html", label: "Inicio", url: "../main/index.html", status: "publicada" },
+  { key: "main/pages/actividades-2026.html", label: "Actividades 2026", url: "../main/pages/actividades-2026.html", status: "publicada" },
+  { key: "main/pages/ludoteca.html", label: "Ludoteca", url: "../main/pages/ludoteca.html", status: "publicada" },
+  { key: "main/pages/sobre-nosotros.html", label: "Sobre nosotros", url: "../main/pages/sobre-nosotros.html", status: "publicada" },
+  { key: "main/pages/contacto.html", label: "Contacto", url: "../main/pages/contacto.html", status: "publicada" },
+  { key: "main/pages/como-llegar.html", label: "Como llegar", url: "../main/pages/como-llegar.html", status: "publicada" },
 ];
 
 const BLOCK_LIBRARY = {
@@ -337,7 +337,7 @@ function makeBlockCard(block) {
 function renderPagesPicker() {
   const pages = getPagesMeta();
   pagePicker.innerHTML = pages.map((page) => `<option value="${page.key}">${page.label}</option>`).join("");
-  if (!pages.find((page) => page.key === currentPageKey)) currentPageKey = pages[0]?.key || "index.html";
+  if (!pages.find((page) => page.key === currentPageKey)) currentPageKey = pages[0]?.key || "main/index.html";
   pagePicker.value = currentPageKey;
 }
 
@@ -1345,7 +1345,7 @@ function removePage(key) {
 
   store.pagesMeta = store.pagesMeta.filter((page) => page.key !== key);
   delete store.pages[key];
-  if (currentPageKey === key) currentPageKey = store.pagesMeta[0]?.key || "index.html";
+  if (currentPageKey === key) currentPageKey = store.pagesMeta[0]?.key || "main/index.html";
 
   renderPagesPicker();
   renderPagesTab();
@@ -1689,3 +1689,4 @@ function escapeAttr(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 }
+

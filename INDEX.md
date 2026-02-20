@@ -258,3 +258,30 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - Los cambios se guardan automáticamente y se reflejan en las páginas fuera del admin mediante el loader.
   - El superadmin mantiene control para habilitar/deshabilitar administradores dentro de configuración.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-20 (reorganización en carpetas: principal/editor/compartido)
+- Solicitud: mover todo lo de la web principal a una carpeta, todo lo del editor a otra y lo compartido por ambas a una tercera carpeta.
+- Nueva estructura aplicada:
+  - `main/` (web principal):
+    - `main/index.html`
+    - `main/pages/*`
+    - `main/src/data/*`
+    - `main/src/scripts/*`
+    - `main/src/styles/*`
+    - `main/post-12.css`
+  - `editor/` (web editor):
+    - `editor/admin.html`
+    - `editor/src/scripts/admin.js`
+    - `editor/src/styles/admin.css`
+  - `shared/` (uso común de ambas webs):
+    - `shared/scripts/page-edits-loader.js`
+- Ajustes técnicos realizados:
+  - rutas actualizadas en `main/index.html` y en todas las páginas de `main/pages/` para cargar `shared/scripts/page-edits-loader.js`.
+  - rutas actualizadas en `editor/admin.html` para abrir `../main/index.html` en el canvas y en preview.
+  - `editor/src/scripts/admin.js` actualizado para editar páginas en rutas `main/...`.
+  - `shared/scripts/page-edits-loader.js` ajustado para resolver claves de página con la nueva estructura (`main/index.html`, `main/pages/...`).
+- Funcionamiento:
+  - La web principal y el editor quedan físicamente separados.
+  - El código común de persistencia visual queda aislado en `shared/`.
+  - El editor sigue aplicando cambios sobre toda la web principal sin romper compatibilidad.
+- Git: commit y push realizados al finalizar este turno.
