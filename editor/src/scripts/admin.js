@@ -1539,7 +1539,8 @@ function saveAdminStatus() {
 
 function findAccount(inputUser, inputPwd) {
   const normalized = normalizeUser(inputUser);
-  return ACCOUNTS.find((account) => normalizeUser(account.user) === normalized && account.pwd === inputPwd);
+  const normalizedPwd = normalizePwd(inputPwd);
+  return ACCOUNTS.find((account) => normalizeUser(account.user) === normalized && normalizePwd(account.pwd) === normalizedPwd);
 }
 
 function normalizeUser(value) {
@@ -1547,6 +1548,13 @@ function normalizeUser(value) {
     .trim()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, "")
+    .toLowerCase();
+}
+
+function normalizePwd(value) {
+  return String(value || "")
+    .trim()
     .toLowerCase();
 }
 function section(title) {

@@ -295,3 +295,14 @@ Cada vez que me des una orden y eso implique cambios de código, actualizaré es
   - Accesos antiguos vuelven a funcionar inmediatamente.
   - Se mantiene la estructura en carpetas (`main/`, `editor/`, `shared/`) sin romper compatibilidad.
 - Git: commit y push realizados al finalizar este turno.
+
+### 2026-02-20 (hotfix login DaVinci/superadmin)
+- Incidencia: acceso al editor fallando con credenciales válidas por comparación demasiado estricta en login.
+- Corrección aplicada:
+  - `editor/src/scripts/admin.js`:
+    - login más tolerante en usuario y contraseña.
+    - usuario: ahora ignora espacios internos además de acentos/mayúsculas.
+    - contraseña: ahora ignora mayúsculas/minúsculas y espacios al inicio/final.
+- Funcionamiento:
+  - `DaVinci / HVitruviano` funciona aunque se escriba con variaciones de mayúsculas y/o espacios accidentales.
+- Git: commit y push realizados al finalizar este turno.
