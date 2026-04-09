@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Vilajuga | Festival del Joc del Penedes</title>
+	<meta name="description" content="Vilajuga es el festival del joc del Penedes: ludoteca de 300+ jocs, torneigs, demostracions i activitats familiars a Vilafranca del Penedes.">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Chango&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+	<style>
+		:root {
+			--ink: #142016;
+			--paper: #f9f3e8;
+			--c1: #f25c2f;
+			--c2: #f2c335;
+			--c3: #1d7c6f;
+			--c4: #0f4f8a;
+			--card: #fffdf7;
+			--shadow: 0 16px 38px rgba(20, 32, 22, 0.16);
+			--radius: 18px;
+		}
+
+		* {
+			box-sizing: border-box;
+		}
+
+		html {
+			scroll-behavior: smooth;
+		}
+
+		body {
+			margin: 0;
+			color: var(--ink);
+			font-family: "DM Sans", sans-serif;
+			background:
+				radial-gradient(1000px 520px at 8% -8%, rgba(242, 92, 47, 0.18), transparent 65%),
+				radial-gradient(850px 420px at 95% 8%, rgba(29, 124, 111, 0.2), transparent 60%),
+				linear-gradient(180deg, #fffdf8, var(--paper));
+			min-height: 100vh;
+			overflow-x: hidden;
+		}
+
+		body::before {
+			content: "";
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			opacity: 0.18;
+			background-image:
+				linear-gradient(transparent 96%, rgba(20, 32, 22, 0.08) 96%),
+				linear-gradient(90deg, transparent 96%, rgba(20, 32, 22, 0.06) 96%);
+			background-size: 16px 16px;
+			z-index: 0;
+		}
+
+		.wrap {
+			width: min(1140px, 92vw);
+			margin: 0 auto;
+			position: relative;
+			z-index: 1;
+		}
+
+		.topbar {
+			position: sticky;
+			top: 0;
+			z-index: 20;
+			backdrop-filter: blur(8px);
+			background: rgba(249, 243, 232, 0.8);
+			border-bottom: 1px solid rgba(20, 32, 22, 0.12);
+		}
+
+		.nav {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 1rem;
+			padding: 0.9rem 0;
+		}
+
+		.brand {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.65rem;
+			text-decoration: none;
+			color: inherit;
+			font-weight: 700;
+			font-size: 0.98rem;
+			letter-spacing: 0.03em;
+			text-transform: uppercase;
+		}
+
+		.dice {
+			width: 34px;
+			aspect-ratio: 1;
+			background: conic-gradient(from 40deg, var(--c1), var(--c2), var(--c3), var(--c1));
+			border-radius: 8px;
+			transform: rotate(12deg);
+			box-shadow: 0 10px 18px rgba(15, 79, 138, 0.22);
+			position: relative;
+		}
+
+		.dice::after {
+			content: "";
+			position: absolute;
+			inset: 7px;
+			border-radius: 5px;
+			background: #fff8ea;
+			box-shadow: inset 0 0 0 1.5px rgba(20, 32, 22, 0.2);
+		}
+
+		.nav ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+			display: flex;
+			gap: 0.85rem;
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+
+		.nav a.nav-link {
+			text-decoration: none;
+			color: var(--ink);
+			font-size: 0.93rem;
+			font-weight: 600;
+			border-radius: 999px;
+			padding: 0.42rem 0.82rem;
+			transition: transform 0.22s ease, background-color 0.22s ease;
+		}
+
+		.nav a.nav-link:hover,
+		.nav a.nav-link:focus-visible {
+			background: #fff;
+			transform: translateY(-2px);
+			outline: none;
+		}
+
+		.hero {
+			padding: 4.6rem 0 3.2rem;
+			display: grid;
+			grid-template-columns: 1.1fr 0.9fr;
+			gap: 1.5rem;
+			align-items: center;
+		}
+
+		.tag {
+			display: inline-flex;
+			align-items: center;
+			gap: 0.45rem;
+			border-radius: 999px;
+			padding: 0.36rem 0.78rem;
+			font-size: 0.76rem;
+			font-weight: 700;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			background: #fff;
+			border: 1px solid rgba(20, 32, 22, 0.14);
+		}
+
+		h1,
+		h2,
+		h3 {
+			font-family: "Chango", cursive;
+			letter-spacing: 0.01em;
+			margin: 0;
+			line-height: 1.05;
+		}
+
+		h1 {
+			margin-top: 0.95rem;
+			font-size: clamp(2.1rem, 6vw, 4rem);
+			text-wrap: balance;
+		}
+
+		.hero p {
+			margin: 1rem 0 1.35rem;
+			font-size: clamp(1.03rem, 2.1vw, 1.16rem);
+			max-width: 62ch;
+		}
+
+		.cta-row {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 0.65rem;
+		}
+
+		.btn {
+			text-decoration: none;
+			font-weight: 700;
+			padding: 0.7rem 1rem;
+			border-radius: 999px;
+			border: 2px solid transparent;
+			transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			min-width: 160px;
+		}
+
+		.btn-primary {
+			background: var(--c1);
+			color: #fff;
+			box-shadow: 0 10px 22px rgba(242, 92, 47, 0.35);
+		}
+
+		.btn-secondary {
+			border-color: rgba(20, 32, 22, 0.24);
+			color: var(--ink);
+			background: rgba(255, 255, 255, 0.7);
+		}
+
+		.btn:hover,
+		.btn:focus-visible {
+			transform: translateY(-2px);
+			outline: none;
+		}
+
+		.hero-card {
+			background: var(--card);
+			border-radius: 24px;
+			border: 2px solid rgba(20, 32, 22, 0.08);
+			box-shadow: var(--shadow);
+			padding: 1.2rem;
+			transform: rotate(-1.6deg);
+		}
+
+		.hero-card strong {
+			font-size: 0.8rem;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			display: block;
+			margin-bottom: 0.35rem;
+		}
+
+		.meta {
+			margin-top: 1rem;
+			display: grid;
+			gap: 0.75rem;
+		}
+
+		.meta-item {
+			border-radius: 13px;
+			padding: 0.8rem;
+			background: linear-gradient(145deg, #fff9ee, #fdf3dc);
+			border: 1px dashed rgba(20, 32, 22, 0.18);
+			font-size: 0.95rem;
+		}
+
+		.section {
+			margin: 2.4rem 0;
+			scroll-margin-top: 82px;
+		}
+
+		.section-title {
+			display: inline-block;
+			font-size: clamp(1.5rem, 4vw, 2.4rem);
+			margin-bottom: 1rem;
+			background: linear-gradient(90deg, var(--c4), var(--c3));
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+		}
+
+		.cards {
+			display: grid;
+			gap: 1rem;
+			grid-template-columns: repeat(12, 1fr);
+		}
+
+		.card {
+			grid-column: span 4;
+			background: var(--card);
+			border: 1px solid rgba(20, 32, 22, 0.11);
+			border-radius: var(--radius);
+			padding: 1rem;
+			box-shadow: var(--shadow);
+			position: relative;
+			overflow: hidden;
+		}
+
+		.card::before {
+			content: "";
+			position: absolute;
+			inset: auto -30% -62% -30%;
+			height: 120px;
+			background: radial-gradient(circle at 50% 30%, rgba(242, 195, 53, 0.3), transparent 70%);
+			pointer-events: none;
+		}
+
+		.card h3 {
+			font-size: 1.05rem;
+			margin-bottom: 0.5rem;
+		}
+
+		.card p,
+		.card li {
+			font-size: 0.95rem;
+			line-height: 1.5;
+		}
+
+		.card ul {
+			margin: 0;
+			padding-left: 1rem;
+		}
+
+		.band {
+			border-radius: 22px;
+			padding: 1.3rem;
+			background: linear-gradient(125deg, var(--c3), var(--c4));
+			color: #fff;
+			display: grid;
+			grid-template-columns: 1fr auto;
+			align-items: center;
+			gap: 0.8rem;
+			box-shadow: var(--shadow);
+		}
+
+		.band strong {
+			font-size: 1.1rem;
+		}
+
+		.band .btn {
+			background: #fff;
+			color: var(--c4);
+			min-width: 0;
+			padding-inline: 1.2rem;
+		}
+
+		.timeline {
+			display: grid;
+			gap: 0.9rem;
+		}
+
+		.timeline-item {
+			border-radius: 16px;
+			border: 2px solid rgba(20, 32, 22, 0.12);
+			background: #fff;
+			padding: 1rem;
+			display: grid;
+			grid-template-columns: 170px 1fr;
+			gap: 0.9rem;
+		}
+
+		.date-pill {
+			font-weight: 800;
+			text-transform: uppercase;
+			letter-spacing: 0.03em;
+			color: var(--c4);
+		}
+
+		.list-grid {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(220px, 1fr));
+			gap: 0.65rem;
+			margin-top: 0.75rem;
+		}
+
+		.chip {
+			background: #fff;
+			border: 1px solid rgba(20, 32, 22, 0.15);
+			border-radius: 999px;
+			padding: 0.48rem 0.85rem;
+			font-size: 0.9rem;
+			font-weight: 600;
+			text-align: center;
+		}
+
+		.contact {
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 1rem;
+		}
+
+		.contact-card {
+			border-radius: 18px;
+			background: #fff;
+			border: 1px solid rgba(20, 32, 22, 0.14);
+			padding: 1.1rem;
+			box-shadow: var(--shadow);
+		}
+
+		.contact a {
+			color: var(--c4);
+			font-weight: 700;
+			text-underline-offset: 2px;
+		}
+
+		footer {
+			margin: 3rem 0 2rem;
+			text-align: center;
+			font-size: 0.9rem;
+			color: rgba(20, 32, 22, 0.8);
+		}
+
+		.reveal {
+			opacity: 0;
+			transform: translateY(20px) scale(0.98);
+			transition: opacity 0.7s ease, transform 0.7s ease;
+		}
+
+		.reveal.show {
+			opacity: 1;
+			transform: translateY(0) scale(1);
+		}
+
+		.stagger:nth-child(2) { transition-delay: 0.08s; }
+		.stagger:nth-child(3) { transition-delay: 0.16s; }
+
+		@media (max-width: 960px) {
+			.hero {
+				grid-template-columns: 1fr;
+			}
+
+			.cards .card {
+				grid-column: span 6;
+			}
+
+			.timeline-item {
+				grid-template-columns: 1fr;
+			}
+
+			.contact {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media (max-width: 680px) {
+			.nav {
+				flex-direction: column;
+				align-items: flex-start;
+			}
+
+			.cards .card {
+				grid-column: span 12;
+			}
+
+			.band {
+				grid-template-columns: 1fr;
+			}
+
+			.list-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+<body>
+	<header class="topbar">
+		<div class="wrap nav">
+			<a class="brand" href="#inici">
+				<span class="dice" aria-hidden="true"></span>
+				<span>Vilajuga Festival</span>
+			</a>
+			<ul>
+				<li><a class="nav-link" href="#inici">Inici</a></li>
+				<li><a class="nav-link" href="#que-hi-ha">Que hi trobarem</a></li>
+				<li><a class="nav-link" href="#activitats">Activitats 2026</a></li>
+				<li><a class="nav-link" href="#associacio">Associacio</a></li>
+				<li><a class="nav-link" href="#contacte">Contacte</a></li>
+			</ul>
+		</div>
+	</header>
+
+	<main class="wrap">
+		<section class="hero" id="inici">
+			<div>
+				<span class="tag reveal show">Festival del joc del Penedes</span>
+				<h1 class="reveal show">Joc, comunitat i imaginacio a Vilafranca.</h1>
+				<p class="reveal show">
+					Vilajuga acosta els jocs de taula, rol, activitats familiars i experiències mes mogudes a tots els publics.
+					Una jornada gran i oberta, impulsada per La Casa dels Estranys, amb una comunitat viva durant tot l'any.
+				</p>
+				<div class="cta-row reveal show">
+					<a class="btn btn-primary" href="https://www.vilajuga.org/" target="_blank" rel="noopener noreferrer">Web oficial</a>
+					<a class="btn btn-secondary" href="#activitats">Veure activitats</a>
+				</div>
+			</div>
+
+			<aside class="hero-card reveal show" aria-label="Dades clau del festival">
+				<strong>Dades clau</strong>
+				<h2 style="font-size: 1.35rem; margin-bottom: 0.45rem;">Ludoteca oberta de 300+ jocs</h2>
+				<p style="margin: 0;">Proves, demostracions, torneigs i espais familiars en una sola experiència.</p>
+				<div class="meta">
+					<div class="meta-item"><b>Lloc:</b> Pavello Firal de Vilafranca, Av. Catalunya, 20.</div>
+					<div class="meta-item"><b>Organitza:</b> Associacio sense anim de lucre La Casa dels Estranys.</div>
+					<div class="meta-item"><b>Ambient:</b> Obert, intergeneracional i participatiu.</div>
+				</div>
+			</aside>
+		</section>
+
+		<section class="section" id="que-hi-ha">
+			<h2 class="section-title reveal">Que hi trobarem?</h2>
+			<div class="cards">
+				<article class="card reveal stagger">
+					<h3>Ludoteca propia</h3>
+					<p>Mes de 300 jocs de taula per jugar gratuïtament a les taules preparades durant l'esdeveniment.</p>
+					<ul>
+						<li>Recomanacions del voluntariat.</li>
+						<li>Titols variats per nivells i estils.</li>
+						<li>Experiencia lliure i guiada.</li>
+					</ul>
+				</article>
+
+				<article class="card reveal stagger">
+					<h3>Activitats per totes les edats</h3>
+					<p>Torneigs de jocs de taula i cartes, zones familiars i espais de participacio pensats per gaudir en grup.</p>
+					<ul>
+						<li>Format inclusiu i intergeneracional.</li>
+						<li>Sessions preparades per famílies.</li>
+						<li>Una jornada de joc completa.</li>
+					</ul>
+				</article>
+
+				<article class="card reveal stagger">
+					<h3>Demostracions i prototips</h3>
+					<p>Editorials col·laboradores i autores ensenyen jocs publicats i prototips no publicats.</p>
+					<ul>
+						<li>Sessions explicades per expertes.</li>
+						<li>Novetats i idees en desenvolupament.</li>
+						<li>Connexio directa amb la comunitat creadora.</li>
+					</ul>
+				</article>
+			</div>
+		</section>
+
+		<section class="section reveal" aria-label="Resum de l'oferta del festival">
+			<div class="band">
+				<div>
+					<strong>Que inclou Vilajuga?</strong>
+					<p style="margin: 0.35rem 0 0;">Ludoteca lliure, rol dirigit, wargames, demostracions, jocs no taula i zona familiar per a infants.</p>
+				</div>
+				<a class="btn" href="https://www.vilajuga.org/ludoteca/" target="_blank" rel="noopener noreferrer">Ludoteca completa</a>
+			</div>
+		</section>
+
+		<section class="section" id="activitats">
+			<h2 class="section-title reveal">Activitats 2026</h2>
+			<div class="timeline">
+				<article class="timeline-item reveal">
+					<div class="date-pill">07/03/2026 · 17:00-21:00</div>
+					<div>
+						<h3 style="font-size: 1.2rem; margin-bottom: 0.35rem;">Torneig de Catan</h3>
+						<p style="margin: 0 0 0.55rem;">Espai Jove la Nau, Carrer de Balta de Cela, 45-47, Vilafranca del Penedes (Barcelona).</p>
+						<p style="margin: 0 0 0.55rem;">Apte per totes les edats i amb premi per a la persona guanyadora.</p>
+						<a href="https://docs.google.com/forms/d/e/1FAIpQLSc6lcHux7J63qppNC27VZyrDbjHrUcv6D_ShcW0Jw8eamX6uQ/viewform" target="_blank" rel="noopener noreferrer">Inscripcio gratuïta al torneig</a>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="section" id="associacio">
+			<h2 class="section-title reveal">La Casa dels Estranys</h2>
+			<div class="cards">
+				<article class="card reveal" style="grid-column: span 7;">
+					<h3>Qui som</h3>
+					<p>
+						Associacio sense anim de lucre fundada el 1994 per persones unides pels jocs de taula i rol.
+						Durant l'any col·labora amb entitats del Penedes i organitza anualment el gran Vilajuga al pavello firal.
+					</p>
+					<p style="margin-bottom: 0;">
+						L'esdeveniment va neixer com a "Juguem!" (primera edicio 2008), i des del 2016 pren el format i nom actual.
+					</p>
+				</article>
+
+				<article class="card reveal" style="grid-column: span 5;">
+					<h3>Equip</h3>
+					<div class="list-grid" aria-label="Membres de l'equip">
+						<span class="chip">Aleix Mestre · President</span>
+						<span class="chip">Miquel Villalba · Tresorer</span>
+						<span class="chip">Mireia Alari · Secretària</span>
+						<span class="chip">Joan Hill · Vocal</span>
+						<span class="chip">Genis Suriol · Vocal</span>
+						<span class="chip">Sergi Gimenez · Vocal</span>
+						<span class="chip">Marc Llorens · Vocal</span>
+						<span class="chip">Pol Salguero · Vocal</span>
+						<span class="chip">Anna Oliva · Vocal</span>
+					</div>
+				</article>
+			</div>
+		</section>
+
+		<section class="section" id="contacte">
+			<h2 class="section-title reveal">Contacta'ns i participa</h2>
+			<div class="contact">
+				<article class="contact-card reveal">
+					<h3 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Vols formar part de l'associacio?</h3>
+					<p>
+						Busquen persones amb ganes de col·laborar, coneixer gent nova i participar en l'organitzacio.
+						Fan reunions mensuals el primer diumenge de cada mes.
+					</p>
+				</article>
+
+				<article class="contact-card reveal">
+					<h3 style="font-size: 1.05rem; margin-bottom: 0.5rem;">Canals de contacte</h3>
+					<p style="margin: 0.35rem 0;"><b>Email:</b> <a href="mailto:holavilajuga@gmail.com">holavilajuga@gmail.com</a></p>
+					<p style="margin: 0.35rem 0;"><b>Instagram:</b> <a href="https://www.instagram.com/vilajuga/" target="_blank" rel="noopener noreferrer">@vilajuga</a></p>
+					<p style="margin: 0.35rem 0;"><b>Com arribar:</b> <a href="https://www.vilajuga.org/projects/" target="_blank" rel="noopener noreferrer">Mapa de la ubicacio</a></p>
+				</article>
+			</div>
+		</section>
+	</main>
+
+	<footer>
+		Festival Vilajuga · Vilafranca del Penedes · Contingut basat en vilajuga.org
+	</footer>
+
+	<script>
+		const observer = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					entry.target.classList.add("show");
+					observer.unobserve(entry.target);
+				}
+			}
+		}, {
+			threshold: 0.16,
+			rootMargin: "0px 0px -60px 0px"
+		});
+
+		document.querySelectorAll(".reveal:not(.show)").forEach((el) => observer.observe(el));
+	</script>
+</body>
+</html>

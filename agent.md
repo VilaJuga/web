@@ -1,0 +1,1 @@
+the frontend folder will be deployed in https://vilajuga.cat and the rest will be on admin.vilajuga.cat
