@@ -620,8 +620,8 @@ function openConfigPanel() {
   if (isInlineTextNode(node)) content.appendChild(inputField("Texto/HTML", "node-html", edits.html ?? node.innerHTML, true));
 
   if (node.tagName === "IMG") {
-    content.appendChild(inputField("URL imagen", "node-src", edits.src ?? node.getAttribute("src") || ""));
-    content.appendChild(inputField("Alt", "node-alt", edits.alt ?? node.getAttribute("alt") || ""));
+    content.appendChild(inputField("URL imagen", "node-src", edits.src ?? (node.getAttribute("src") || "")));
+    content.appendChild(inputField("Alt", "node-alt", edits.alt ?? (node.getAttribute("alt") || "")));
     const imageButton = document.createElement("button");
     imageButton.type = "button";
     imageButton.className = "mini-btn";
@@ -630,13 +630,13 @@ function openConfigPanel() {
     content.appendChild(imageButton);
   }
 
-  if (node.tagName === "A") content.appendChild(inputField("Enlace", "node-href", edits.href ?? node.getAttribute("href") || ""));
+  if (node.tagName === "A") content.appendChild(inputField("Enlace", "node-href", edits.href ?? (node.getAttribute("href") || "")));
   configBody.appendChild(content);
 
   const style = section("🎨 ESTILO");
   style.appendChild(selectField("Alineacion", "node-align", edits.align || node.style.textAlign || "left", ["left", "center", "right"]));
-  style.appendChild(inputField("Clase CSS", "node-class", edits.className ?? node.className || ""));
-  style.appendChild(inputField("ID", "node-id", edits.id ?? node.id || ""));
+  style.appendChild(inputField("Clase CSS", "node-class", edits.className ?? (node.className || "")));
+  style.appendChild(inputField("ID", "node-id", edits.id ?? (node.id || "")));
   configBody.appendChild(style);
 
   const advanced = section("🔗 AVANZADO");
