@@ -1,0 +1,60 @@
+{
+  "hero": [
+    "https://www.vilajuga.org/wp-content/uploads/2025/07/Disseny-web-banners-scaled.jpg",
+    "https://www.vilajuga.org/wp-content/uploads/2025/07/de-scaled.png"
+  ],
+
+  "introGallery": [
+    {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2024/10/IMG-20191021-WA0046-1024x768.jpg",
+      "alt": "Participants jugant",
+      "tall": false
+    },
+    {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2024/10/b1ae7700-2831-4f82-9d49-8f2ae1426036-1024x768.jpg",
+      "alt": "Taula de joc",
+      "tall": false
+    },
+    {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2024/10/72D58D4C-E7FA-453A-AF2E-1B9322602867-576x1024.jpg",
+      "alt": "Espai del festival",
+      "tall": true
+    }
+  ],
+
+  "cards": [
+    {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2024/10/bdca90e8-1708-41a1-808a-62fc3bb2089d-1024x768.jpg",
+      "alt": "Ludoteca"
+    },
+    {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2024/10/eaeb896f-afe1-47e4-a12f-a123278cc8ae-1024x768.jpg",
+      "alt": "Activitats"
+    },
+    {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2025/05/Demostracio-de-jocs-1024x768.jpg",
+      "alt": "Demostracions de jocs"
+    }
+  ],
+
+  "visit": {
+    "src": "https://www.vilajuga.org/wp-content/uploads/2025/07/Diseno-sin-titulo-3.png",
+    "alt": "Fons secció visita"
+  },
+
+  "activitats": {
+    "torneigs": [
+      {
+        "src": "https://www.vilajuga.org/wp-content/uploads/elementor/thumbs/IMG_4740-scaled-rj25hh7co6apcuai1607iy7sz253msmx907qi66p4c.jpg",
+        "alt": "Torneig de Catan"
+      }
+    ]
+  },
+
+  "about": {
+    "logo": {
+      "src": "https://www.vilajuga.org/wp-content/uploads/2025/06/307320208_385794460433899_2148811123028131423_n-1024x1024.png",
+      "alt": "Logo Vilajuga"
+    }
+  }
+}

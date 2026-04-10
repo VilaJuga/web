@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/usuario/Desktop/VilajugaMarc/web -type f -not -path */node_modules/*)",
+      "Bash(npm --version)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(npx vite:*)",
+      "Bash(firebase --version)",
+      "Bash(java -version)",
+      "Bash(\"/c/Users/usuario/AppData/Roaming/npm/firebase.cmd\" --version)",
+      "Bash(./node_modules/.bin/firebase --version)"
+    ]
+  }
+}

@@ -1,0 +1,636 @@
+/* ── Admin editable elements ── */
+.admin-editable {
+  cursor: pointer;
+  outline: 2px dashed transparent;
+  outline-offset: 4px;
+  transition: outline-color 0.15s;
+}
+
+.admin-editable:hover {
+  outline-color: var(--accent);
+}
+
+/* ── Admin list controls (add/delete buttons) ── */
+.admin-item-wrap {
+  position: relative;
+}
+
+.admin-draggable {
+  cursor: grab;
+  transition: transform 0.15s, opacity 0.15s, outline-color 0.15s;
+  outline: 2px dashed transparent;
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.admin-draggable:hover {
+  outline-color: rgba(255, 34, 77, 0.4);
+}
+
+.admin-draggable.dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+.admin-draggable.drag-over {
+  outline-color: var(--accent);
+  transform: scale(1.02);
+}
+
+.admin-delete-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 34, 77, 0.95);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.admin-item-wrap > .admin-delete-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  z-index: 5;
+}
+
+/* Hero admin control bar */
+.hero-admin-controls {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 15;
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 8px 10px;
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  pointer-events: auto;
+}
+
+.admin-delete-btn:hover {
+  background: #ff0033;
+  transform: scale(1.1);
+}
+
+.admin-add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 1.2rem;
+  border: 2px dashed var(--accent);
+  background: rgba(255, 34, 77, 0.05);
+  color: var(--accent);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.admin-add-btn:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.admin-add-btn-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 1rem 0;
+}
+
+.admin-add-btn-wrap.inline {
+  display: inline-flex;
+  padding: 0;
+  margin-left: 0.8rem;
+  vertical-align: middle;
+}
+
+/* ── Admin bar ── */
+.admin-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: #1a1a2e;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  height: 40px;
+  font-size: 0.85rem;
+}
+
+.admin-bar span {
+  opacity: 0.7;
+}
+
+.admin-bar button {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 4px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.admin-bar button:hover {
+  opacity: 0.85;
+}
+
+.admin-bar-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  position: relative;
+}
+
+.admin-bar-dropdown {
+  position: relative;
+}
+
+.admin-bar-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 4px;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 200px;
+  z-index: 200;
+}
+
+.admin-bar-menu button.danger {
+  background: #8b0000;
+}
+
+/* ───────── Users Modal ───────── */
+.users-modal {
+  width: min(95vw, 680px);
+}
+
+.users-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.users-modal-header h3 {
+  margin: 0;
+}
+
+.users-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.user-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 1rem;
+  background: #f7f7fb;
+  border: 1px solid #e5e5ef;
+  border-radius: 10px;
+}
+
+.user-row.super {
+  background: linear-gradient(135deg, #fff5f9, #f7f0ff);
+  border-color: rgba(255, 34, 77, 0.25);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.user-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.super-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ff224d, #8d6bff);
+  color: #fff;
+}
+
+.pwchange-badge {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #fff1c2;
+  color: #8a6a00;
+  font-weight: 600;
+}
+
+.user-perms {
+  font-size: 0.78rem;
+  color: #666;
+}
+
+.user-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.icon-btn {
+  width: 32px;
+  height: 32px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.icon-btn:hover:not(:disabled) {
+  background: #f0f0f7;
+  border-color: #ccc;
+}
+
+.icon-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.icon-btn.danger:hover:not(:disabled) {
+  background: #ffe5e9;
+  border-color: #ff224d;
+  color: #c91642;
+}
+
+/* ───────── User edit modal: permissions grid ───────── */
+.perms-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin: 1rem 0 1.2rem;
+}
+
+.perms-row {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem 1rem;
+  background: #f7f7fb;
+  border: 1px solid #e5e5ef;
+  border-radius: 10px;
+}
+
+.perms-row.admin-row {
+  background: linear-gradient(135deg, #fff5f9, #f7f0ff);
+  border-color: rgba(255, 34, 77, 0.25);
+}
+
+.perms-row-label {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.perms-row-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.perms-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  user-select: none;
+}
+
+.perms-checkbox input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.users-hint {
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 6px;
+  margin-bottom: 1rem;
+}
+
+.users-hint code {
+  background: #f0f0f7;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+/* ───────── Force password change screen ───────── */
+.force-pw-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 15, 23, 0.88);
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: 1.5rem;
+}
+
+.force-pw-box {
+  background: #fff;
+  padding: 2.2rem 2rem;
+  border-radius: 14px;
+  width: min(95vw, 440px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+.force-pw-box h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+}
+
+.force-pw-intro {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 1.2rem;
+  line-height: 1.5;
+}
+
+.force-pw-box label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.force-pw-box input {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+  font-family: inherit;
+}
+
+.force-pw-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+@media (max-width: 640px) {
+  .admin-bar-actions {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  .perms-row {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+body.is-admin .topbar {
+  top: 40px;
+}
+
+/* ── Modal ── */
+.admin-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+.admin-modal {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.8rem;
+  width: min(95vw, 560px);
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.admin-modal h3 {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+}
+
+.admin-modal label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+  color: #555;
+}
+
+.admin-modal input,
+.admin-modal textarea {
+  width: 100%;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+  resize: vertical;
+}
+
+.admin-modal input:focus,
+.admin-modal textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255, 34, 77, 0.1);
+}
+
+.admin-modal-preview {
+  margin-top: 0.8rem;
+  max-width: 100%;
+  max-height: 200px;
+  object-fit: contain;
+  border-radius: 6px;
+  border: 1px solid #eee;
+}
+
+.admin-modal-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  margin-top: 1.2rem;
+}
+
+.admin-btn {
+  padding: 0.55rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.admin-btn.save {
+  background: var(--accent);
+  color: #fff;
+}
+
+.admin-btn.save:hover {
+  opacity: 0.9;
+}
+
+.admin-btn.cancel {
+  background: #e5e5e5;
+  color: #333;
+}
+
+.admin-btn.cancel:hover {
+  background: #d5d5d5;
+}
+
+/* ── Login ── */
+.login-container {
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+}
+
+.login-box {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: min(95vw, 380px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.login-box h2 {
+  margin-bottom: 1.5rem;
+}
+
+.login-box label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 0.65rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  margin-top: 0.3rem;
+}
+
+.login-box input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.login-box button {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.login-error {
+  color: var(--accent);
+  font-size: 0.9rem;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.pw-input-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-top: 0.3rem;
+}
+
+.pw-input-wrap input {
+  width: 100%;
+  padding-right: 48px !important;
+  margin-top: 0 !important;
+}
+
+.login-box .pw-toggle,
+.pw-toggle {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: auto !important;
+  margin: 0 !important;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1.35rem;
+  padding: 6px 8px;
+  border-radius: 4px;
+  line-height: 1;
+  opacity: 0.7;
+  transition: opacity 0.15s, background 0.15s;
+  z-index: 2;
+}
+
+.pw-toggle:hover {
+  opacity: 1;
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.login-actions {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 1rem;
+}
+
+.login-actions button {
+  flex: 1;
+}

@@ -1,0 +1,347 @@
+/* ============================================================
+   RESPONSIVE — breakpoints: 1024px (tablet), 820px (mobile-L),
+   640px (mobile), 480px (mobile-S)
+   ============================================================ */
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .intro {
+    grid-template-columns: 1fr;
+  }
+
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .torneig-card {
+    grid-template-columns: 1fr;
+  }
+
+  .torneig-card img {
+    max-height: 280px;
+    object-fit: cover;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Mobile-L (≤820px) ── */
+@media (max-width: 820px) {
+  .menu-toggle {
+    display: inline-block;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 72px;
+    right: 1rem;
+    flex-direction: column;
+    min-width: 230px;
+    background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 10px;
+    padding: 0.6rem;
+    display: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    z-index: 60;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-links a {
+    color: #222;
+    border-bottom: 0;
+    padding: 0.6rem;
+    border-radius: 6px;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: #fff;
+    background: var(--accent);
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-gallery {
+    grid-template-columns: 1fr;
+  }
+
+  .intro-gallery img,
+  .intro-gallery img.tall {
+    height: 240px;
+  }
+
+  .page-container {
+    padding: 2rem 1rem;
+  }
+
+  .contact-form {
+    padding: 1.5rem 1.2rem;
+  }
+
+  /* ─ Ludoteca ─ */
+  .ludoteca-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.7rem;
+  }
+
+  .ludoteca-search,
+  .ludoteca-toolbar select,
+  .ludoteca-toolbar button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* ─ ComArribar ─ */
+  .transport-tabs .tab-buttons {
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .transport-tabs .tab-btn {
+    flex: 1 1 45%;
+    min-width: 0;
+  }
+
+  .map-container iframe {
+    height: auto;
+    aspect-ratio: 16 / 10;
+    width: 100%;
+  }
+}
+
+/* ── Mobile (≤640px) ── */
+@media (max-width: 640px) {
+  .page-container {
+    padding: 1.5rem 0.9rem;
+  }
+
+  h1 {
+    font-size: clamp(1.6rem, 6vw, 2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 5vw, 1.6rem);
+  }
+
+  /* ─ Hero ─ */
+  .hero {
+    height: clamp(260px, 60vw, 420px);
+  }
+
+  .hero-arrow {
+    width: 44px;
+    height: 44px;
+    font-size: 1.5rem;
+  }
+
+  .hero-arrow.prev {
+    left: 0.5rem;
+  }
+
+  .hero-arrow.next {
+    right: 0.5rem;
+  }
+
+  /* ─ Ludoteca: tabla scroll horizontal ─ */
+  .ludoteca-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 -0.9rem;
+    padding: 0 0.9rem;
+  }
+
+  .ludoteca-table {
+    min-width: 680px;
+  }
+
+  .ludoteca-table .game-image-cell {
+    width: 56px;
+  }
+
+  .ludoteca-table .game-thumb,
+  .ludoteca-table .game-thumb-placeholder {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
+
+  .ludoteca-table th,
+  .ludoteca-table td {
+    padding: 8px 6px;
+    font-size: 0.85rem;
+  }
+
+  /* ─ Activitats ─ */
+  .torneig-card {
+    padding: 1.2rem;
+  }
+
+  .torneig-card img {
+    max-height: 220px;
+  }
+
+  /* ─ Contacte ─ */
+  .contact-form {
+    padding: 1.2rem 1rem;
+  }
+
+  .contact-form label {
+    font-size: 0.85rem;
+  }
+
+  /* ─ ComArribar tabs ─ */
+  .transport-tabs .tab-btn {
+    flex: 1 1 100%;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  /* ─ Admin bar ─ */
+  .admin-bar {
+    height: auto;
+    min-height: 44px;
+    padding: 0.5rem 0.9rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .admin-bar span {
+    font-size: 0.75rem;
+    flex: 1 1 100%;
+    text-align: center;
+  }
+
+  .admin-bar button {
+    padding: 6px 14px;
+    min-height: 32px;
+  }
+
+  body.is-admin .topbar {
+    top: 60px;
+  }
+
+  /* ─ Modales ─ */
+  .admin-modal {
+    padding: 1.2rem 1rem;
+    max-height: 92vh;
+  }
+
+  .admin-modal h3 {
+    font-size: 1.05rem;
+  }
+
+  .admin-modal input,
+  .admin-modal textarea {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+  }
+
+  .admin-modal-actions {
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+  }
+
+  .admin-modal-actions .admin-btn {
+    width: 100%;
+  }
+
+  /* ─ Import diff modal ─ */
+  .diff-summary {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .diff-summary .diff-counter {
+    width: 100%;
+  }
+
+  /* ─ Footer ─ */
+  .site-footer {
+    padding: 1.5rem 1rem;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .site-footer .footer-content {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+}
+
+/* ── Mobile-S (≤480px) ── */
+@media (max-width: 480px) {
+  .page-container {
+    padding: 1.2rem 0.7rem;
+  }
+
+  .topbar {
+    padding: 0 0.7rem;
+  }
+
+  .nav-links {
+    top: 64px;
+    right: 0.6rem;
+  }
+
+  .hero-dots {
+    bottom: 0.6rem;
+  }
+
+  .intro-gallery img,
+  .intro-gallery img.tall {
+    height: 200px;
+  }
+
+  .torneig-card {
+    padding: 1rem;
+  }
+
+  .torneig-card img {
+    max-height: 180px;
+  }
+
+  .btn-primary,
+  .btn-instagram {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1rem;
+  }
+
+  /* Admin login */
+  .login-box {
+    padding: 1.5rem 1.2rem;
+  }
+
+  .login-actions {
+    flex-direction: column;
+  }
+
+  /* Hide non-essential info in cramped admin bar */
+  .admin-bar span {
+    display: none;
+  }
+}
+
+/* ── Touch-friendly adjustments (any touch device) ── */
+@media (hover: none) and (pointer: coarse) {
+  .admin-editable {
+    outline-offset: 2px;
+  }
+
+  button,
+  .btn-primary,
+  .btn-instagram,
+  .tab-btn {
+    min-height: 40px;
+  }
+}

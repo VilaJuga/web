@@ -1,0 +1,186 @@
+{
+  "navLinks": [
+    { "label": "Inici", "path": "/", "active": true },
+    { "label": "Activitats 2026", "path": "/activitats-2026" },
+    { "label": "Ludoteca", "path": "/ludoteca" },
+    { "label": "Sobre Nosaltres", "path": "/sobre-nosaltres" },
+    { "label": "Contacta'ns", "path": "/contacte" },
+    { "label": "Com arribar", "path": "/com-arribar" }
+  ],
+
+  "intro": {
+    "title": "FESTIVAL DEL JOC DEL PENEDÈS VILAJUGA",
+    "description": "És un festival destinat a acostar els jocs de taula, jocs de rol, jocs familiars i aquelles activitats més mogudes a tot el públic, a Vilafranca del Penedès."
+  },
+
+  "cards": [
+    {
+      "title": "Ludoteca pròpia",
+      "text": "Amb una ludoteca pròpia de més de 300 jocs de taula de diferents categories i estils, podràs sol·licitar algun títol de la ludoteca o bé deixar-te assessorar pels voluntaris que organitzen les Vilajuga, per a poder-lo gaudir juntament amb la teva companyia en una de les moltes taules llestes per a tu."
+    },
+    {
+      "title": "Activitats preparades per a totes les edats",
+      "text": "Des de torneigs de jocs de taula i jocs de cartes a espais preparats per gaudir tota la família junta, les Vilajuga disposen de diferents espais (o zones) preparades perquè puguis gaudir d'un dia d'allò més jugaire."
+    },
+    {
+      "title": "Demostracions de jocs",
+      "text": "Podràs gaudir de l'explicació de jocs publicats per les diferents editorials col·laboradores, així com de l'explicació de jocs que encara no han estat publicats, de la mà dels seus autors."
+    }
+  ],
+
+  "timelineItems": [
+    {
+      "side": "left",
+      "label": "Ludoteca de lliure accés",
+      "subLabel": "Amb més de 300 jocs de taula!",
+      "iconClass": "fas fa-dice",
+      "title": "Jocs de taula de lliure accés",
+      "description": "Amb la nostra ludoteca, on de manera gratuïta podreu demanar aquell joc que vulgueu provar, o bé deixar-vos assessorar pels membres de l'organització."
+    },
+    {
+      "side": "right",
+      "label": "Explicacions de jocs publicats",
+      "subLabel": "De mà de les pròpies editorials col·laboradores.",
+      "iconClass": "fas fa-dice-d6",
+      "title": "Demostracions de jocs de taula",
+      "description": "Demostracions de prototips de jocs que encara no han estat publicats, explicats de la mà dels seus creadors."
+    },
+    {
+      "side": "left",
+      "label": "Wargames",
+      "subLabel": "Per poder gaudir de jocs estratègics i de recreació de guerres amb miniatures.",
+      "iconClass": "fas fa-dice-d20",
+      "title": "Jocs de rol",
+      "description": "Deixa volar la teva imaginació i protagonitza una història narrada pels nostres col·laboradors i Directors de Joc!"
+    },
+    {
+      "side": "right",
+      "label": "Jocs de NO taula",
+      "subLabel": "Amb tot un espai per seguir explorant maneres de divertir-se que no requereixen estar asseguts a taula.",
+      "iconClass": "fas fa-dice-six",
+      "title": "Zona de jocs familiars",
+      "description": "Zona destinada a que els més petits puguin gaudir dels seus primers jocs de taula i explorar les seves capacitats motrius i sensorials."
+    }
+  ],
+
+  "visit": {
+    "title": "Veniu a gaudir!",
+    "address": "Pavelló Firal de Vilafranca, Av. Catalunya, 20, 08720, Vilafranca del Penedès"
+  },
+
+  "activitats": {
+    "title": "Activitats 2026",
+    "sectionTitle": "Torneigs",
+    "torneigs": [
+      {
+        "title": "Torneig de Catan",
+        "data": "07/03/2026",
+        "horari": "17h – 21h",
+        "ubicacio": "Espai Jove la Nau, Carrer de Baltà de Cela, 45, 47, 08720 Vilafranca del Penedès, Barcelona",
+        "notes": [
+          "Apte per a totes les edats.",
+          "Premi per a la persona guanyadora!"
+        ],
+        "inscripcioUrl": "https://docs.google.com/forms/d/e/1FAIpQLSc6lcHux7J63qppNC27VZyrDbjHrUcv6D_ShcW0Jw8eamX6uQ/viewform",
+        "inscripcioText": "Inscripció gratuïta"
+      }
+    ]
+  },
+
+  "ludoteca": {
+    "title": "La nostra ludoteca",
+    "description": "Tenim una ludoteca molt extensa de jocs de taula. Tot seguit podreu veure tots els jocs que tenim disponibles i portem a les jornades.",
+    "sheetId": "1Cr9B_gttTqUf25YpnlaRFpQOv92NjZ-m",
+    "searchPlaceholder": "Cerca jocs..."
+  },
+
+  "about": {
+    "title": "Sobre nosaltres",
+    "sectionTitle": "Qui som?",
+    "paragraphs": [
+      "Som l'associació la Casa dels Estranys, una associació sense ànim de lucre nascuda l'any 1994 per un grup de persones que els unia l'afany per jugar plegats a jocs de taula, jocs de rol…",
+      "Durant l'any anem col·laborant amb altres entitats del Penedès realitzant activitats en petit format i, un cop l'any, celebrem les Vilajuga, unes grans jornades de jocs de taula celebrades al pavelló Firal de Vilafranca del Penedès.",
+      "Inicialment, les Vilajuga tenien un format diferent i s'anomenaven *Juguem!*. Eren organitzades conjuntament per La Casa dels Estranys i ADALT, celebrant la seva primera edició l'any 2008. Van estar 8 edicions apropant els jocs de taula al Penedès i rodalies. Posteriorment, l'any 2016, aprofitant el relleu generacional d'organitzadors i organitzadores, van adoptar el nou format que actualment continua vigent, sota el nom de les Vilajuga.",
+      "Actualment som set voluntàries que ens encarreguem d'organitzar les activitats:"
+    ],
+    "membres": [
+      "President: Aleix Mestre",
+      "Tresorer: Miquel Villalba",
+      "Secretària: Mireia Alari",
+      "Vocals: Joan Hill, Genís Suriol, Sergi Giménez, Marc Llorens, Pol Salguero, Anna Oliva"
+    ]
+  },
+
+  "contacte": {
+    "title": "Contacta'ns",
+    "sections": [
+      {
+        "heading": "Vols formar part de l'associació?",
+        "paragraphs": [
+          "Si tens ganes de col·laborar, conèixer gent nova i passar-t'ho bé, t'animem a unir-te a nosaltres! Ens reunim mensualment els primers diumenges de mes. En aquestes trobades, tractem temes interns de l'associació, organitzem els propers esdeveniments i, sobretot, compartim estones jugant a jocs de taula.",
+          "No ho dubtis més i forma part del nostre equip de voluntaris!"
+        ]
+      },
+      {
+        "heading": "Vols contactar amb nosaltres?",
+        "paragraphs": [
+          "Si tens qualsevol dubte, comentari, suggeriment… O simplement t'encanta aquest projecte i vols participar-hi d'alguna manera, no dubtis en contactar-nos!",
+          "Ens trobaràs per correu electrònic a **holavilajuga@gmail.com** i també per instagram, a @vilajuga."
+        ]
+      }
+    ],
+    "instagram": {
+      "url": "https://www.instagram.com/vilajuga/",
+      "text": "INSTAGRAM"
+    },
+    "adminEmail": "holavilajuga@gmail.com",
+    "form": {
+      "title": "Envia'ns un missatge",
+      "nameLabel": "Nom",
+      "emailLabel": "Correu electrònic",
+      "phoneLabel": "Telèfon (opcional)",
+      "messageLabel": "Missatge",
+      "submitLabel": "Enviar",
+      "successMessage": "Missatge enviat correctament. Et contactarem aviat!",
+      "errorMessage": "Hi ha hagut un error. Torna-ho a provar més tard."
+    }
+  },
+
+  "comArribar": {
+    "title": "Com arribar?",
+    "address": "Avinguda Catalunya, 19, 08720, Vilafranca del Penedès",
+    "mapUrl": "https://maps.google.com/maps?q=vilajuga&t=m&z=10&output=embed&iwloc=near",
+    "transport": [
+      {
+        "label": "En vehicle privat",
+        "paragraphs": [
+          "Autopista AP7. Sortides 28, Vilafranca del Penedès N; 29, Vilafranca del Penedès C-Vilanova i la Geltrú-Sitges o Sortida 30 Vilafranca del Penedès S. Carretera N340. C15."
+        ]
+      },
+      {
+        "label": "En tren",
+        "paragraphs": [
+          "Línia R4 Sant Vicenç de Calders – Manresa. Estació Vilafranca del Penedès."
+        ]
+      },
+      {
+        "label": "En bus",
+        "paragraphs": [
+          "MonBus (Barcelona – Vilafranca del Penedès).",
+          "Autocars Plana (Vilanova i la Geltrú – Vilafranca del Penedès)",
+          "Autocars Penedès (Tarragona – El Vendrell – Vilafranca del Penedès)",
+          "Autocars Castellví (La Múnia – Santa Margarida i els Monjos – Vilafranca del Penedès)",
+          "Autocars Vendrell (Sant Sadurní d'Anoia – Vilafranca del Penedès i l'Ordal – Sant Sadurní d'Anoia)",
+          "Altres destinacions, consultar-les a l'Estació d'autobusos de Vilafranca del Penedès (Tel. 93 890 11 51)"
+        ]
+      },
+      {
+        "label": "En bus urbà",
+        "paragraphs": [
+          "L1 (parada 30)",
+          "L2 (parada 7 o 8)"
+        ]
+      }
+    ]
+  }
+}

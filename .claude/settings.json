@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmd //c \"winget --version\")",
+      "Bash(cmd //c \"choco --version 2>&1 ; scoop --version 2>&1\")"
+    ]
+  }
+}
