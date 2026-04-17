@@ -121,12 +121,16 @@ export function useLudoteca(sheetId) {
         });
       }
     }
+    const collator = new Intl.Collator("ca", {
+      sensitivity: "base",
+      ignorePunctuation: true,
+      numeric: true,
+    });
     list = [...list].sort((a, b) => {
-      const va = (a[sortBy] || "").toString().toLowerCase();
-      const vb = (b[sortBy] || "").toString().toLowerCase();
-      if (va < vb) return sortDir === "asc" ? -1 : 1;
-      if (va > vb) return sortDir === "asc" ? 1 : -1;
-      return 0;
+      const va = (a[sortBy] || "").toString();
+      const vb = (b[sortBy] || "").toString();
+      const cmp = collator.compare(va, vb);
+      return sortDir === "asc" ? cmp : -cmp;
     });
     return list;
   }, [games, search, columnFilters, sortBy, sortDir]);
